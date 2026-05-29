@@ -1,3 +1,5 @@
+import { renderWorld } from './render/worldRenderer.js'
+
 export const engine = {
   canvas: null,
   ctx: null,
@@ -48,9 +50,10 @@ export const engine = {
     this.ctx.fillRect(0, 0, this.width, this.height)
 
     // debug text
-    this.ctx.fillStyle = '#ffffff'
-    this.ctx.font = '20px Arial'
-    this.ctx.fillText('STATES', 20, 40)
+    this.ctx.fillStyle = '#1a1a1a'
+    this.ctx.fillRect(0, 0, this.width, this.height)
+
+    renderWorld(this.ctx)
   },
 
   loop() {
