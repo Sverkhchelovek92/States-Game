@@ -1,12 +1,16 @@
 import { world } from '../world.js'
+import { camera } from '../camera.js'
 
 export function renderWorld(ctx) {
   for (let y = 0; y < world.height; y++) {
     for (let x = 0; x < world.width; x++) {
       const tile = world.tiles[y][x]
 
-      const screenX = x * world.tileSize
-      const screenY = y * world.tileSize
+      const worldX = x * world.tileSize
+      const worldY = y * world.tileSize
+
+      const screenX = worldX - camera.x
+      const screenY = worldY - camera.y
 
       // temporary colors
       if (tile.type === 'grass') {
