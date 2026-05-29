@@ -1,4 +1,5 @@
 import { renderWorld } from './render/worldRenderer.js'
+import { camera } from './camera.js'
 
 export const engine = {
   canvas: null,
@@ -9,12 +10,22 @@ export const engine = {
 
   dpr: window.devicePixelRatio || 1,
 
+  mouse: {
+    x: 0,
+    y: 0,
+  },
+
   init() {
     this.createCanvas()
     this.resize()
 
     window.addEventListener('resize', () => {
       this.resize()
+    })
+
+    window.addEventListener('mousemove', (event) => {
+      this.mouse.x = event.clientX
+      this.mouse.y = event.clientY
     })
 
     this.loop()
@@ -41,7 +52,26 @@ export const engine = {
   },
 
   update() {
-    // game logic
+    // camera mouse tracking
+    // left
+    if (this.mouse.x < camera.edgeSize) {
+      camera.x -= camera.speed
+    }
+
+    // right
+    if (this.mouse.x > this.width - camera.edgeSize) {
+      camera.x += camera.speed
+    }
+
+    // top
+    if (this.mouse.y < camera.edgeSize) {
+      camera.y -= camera.speed
+    }
+
+    // bottom
+    if (this.mouse.y > this.height - camera.edgeSize) {
+      camera.y += camera.speed
+    }
   },
 
   render() {
