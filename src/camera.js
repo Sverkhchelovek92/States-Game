@@ -6,3 +6,13 @@ export const camera = {
 
   edgeSize: 32,
 }
+
+export function clampCameraY(maxY) {
+  if (camera.y < 0) {
+    camera.y = 0
+  }
+
+  if (camera.y > maxY) {
+    camera.y = maxY
+  }
+}
