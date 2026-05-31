@@ -1,5 +1,6 @@
 import { renderWorld } from './render/worldRenderer.js'
 import { camera } from './camera.js'
+import { world } from './world.js'
 
 export const engine = {
   canvas: null,
@@ -71,6 +72,16 @@ export const engine = {
     // bottom
     if (this.mouse.y > this.height - camera.edgeSize) {
       camera.y += camera.speed
+    }
+
+    const maxCameraY = Math.max(0, world.getPixelHeight() - this.height)
+
+    if (camera.y < 0) {
+      camera.y = 0
+    }
+
+    if (camera.y > maxCameraY) {
+      camera.y = maxCameraY
     }
   },
 
