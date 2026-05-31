@@ -10,6 +10,14 @@ export const world = {
 
   tiles: [],
 
+  getPixelWidth() {
+    return this.width * this.tileSize
+  },
+
+  getPixelHeight() {
+    return this.height * this.tileSize
+  },
+
   generate() {
     this.tiles = []
 
