@@ -6,30 +6,37 @@ export function renderWorld(ctx) {
     for (let x = 0; x < world.width; x++) {
       const tile = world.tiles[y][x]
 
+      const mapPixelWidth = world.getPixelWidth()
+
       const worldX = x * world.tileSize
       const worldY = y * world.tileSize
 
-      const screenX = worldX - camera.x
-      const screenY = worldY - camera.y
+      for (const offset of [-1, 0, 1]) {
+        const screenX = worldX + offset * mapPixelWidth - camera.x
+
+        const screenY = worldY - camera.y
+
+        // draw tile here
+        if (tile.type === 'grass') {
+          ctx.fillStyle = '#4caf50'
+        }
+
+        if (tile.type === 'water') {
+          ctx.fillStyle = '#2196f3'
+        }
+
+        if (tile.type === 'forest') {
+          ctx.fillStyle = '#2e7d32'
+        }
+
+        ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
+
+        // grid lines
+        ctx.strokeStyle = '#111'
+        ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
+      }
 
       // temporary colors
-      if (tile.type === 'grass') {
-        ctx.fillStyle = '#4caf50'
-      }
-
-      if (tile.type === 'water') {
-        ctx.fillStyle = '#2196f3'
-      }
-
-      if (tile.type === 'forest') {
-        ctx.fillStyle = '#2e7d32'
-      }
-
-      ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
-
-      // grid lines
-      ctx.strokeStyle = '#111'
-      ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
     }
   }
 }
