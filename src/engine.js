@@ -74,6 +74,7 @@ export const engine = {
       camera.y += camera.speed
     }
 
+    // y limit
     const maxCameraY = Math.max(0, world.getPixelHeight() - this.height)
 
     if (camera.y < 0) {
@@ -83,6 +84,12 @@ export const engine = {
     if (camera.y > maxCameraY) {
       camera.y = maxCameraY
     }
+
+    // x wrapping
+
+    const mapPixelWidth = world.getPixelWidth()
+
+    camera.x = ((camera.x % mapPixelWidth) + mapPixelWidth) % mapPixelWidth
   },
 
   render() {
