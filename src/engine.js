@@ -1,6 +1,7 @@
 import { renderWorld } from './render/worldRenderer.js'
 import { camera } from './camera.js'
 import { world } from './world.js'
+import { updateHover } from './input/hover.js'
 
 export const engine = {
   canvas: null,
@@ -90,6 +91,10 @@ export const engine = {
     const mapPixelWidth = world.getPixelWidth()
 
     camera.x = ((camera.x % mapPixelWidth) + mapPixelWidth) % mapPixelWidth
+
+    // update hover
+
+    updateHover(this.mouse.x, this.mouse.y)
   },
 
   render() {

@@ -26,4 +26,6 @@ export function updateHover(mouseX, mouseY) {
   hover.tileY = tileY
 
   hover.tile = world.tiles[tileY][tileX]
+
+  console.log(hover.tileX, hover.tileY)
 }
