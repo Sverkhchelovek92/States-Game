@@ -43,14 +43,18 @@ export function renderWorld(ctx) {
 
         const worldY = hover.tileY * world.tileSize
 
-        const screenX = worldX - camera.x
+        const mapPixelWidth = world.getPixelWidth()
 
-        const screenY = worldY - camera.y
+        for (const offset of [-1, 0, 1]) {
+          const screenX = worldX + offset * mapPixelWidth - camera.x
 
-        ctx.strokeStyle = '#ffff00'
-        ctx.lineWidth = 3
+          const screenY = worldY - camera.y
 
-        ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
+          ctx.strokeStyle = '#ffff00'
+          ctx.lineWidth = 3
+
+          ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
+        }
       }
     }
   }
