@@ -2,6 +2,7 @@ import { renderWorld } from './render/worldRenderer.js'
 import { camera } from './camera.js'
 import { world } from './world.js'
 import { updateHover } from './input/hover.js'
+import { renderDebug } from './render/debugRenderer.js'
 
 export const engine = {
   canvas: null,
@@ -107,6 +108,8 @@ export const engine = {
     this.ctx.fillRect(0, 0, this.width, this.height)
 
     renderWorld(this.ctx)
+
+    renderDebug(this.ctx)
   },
 
   loop() {
