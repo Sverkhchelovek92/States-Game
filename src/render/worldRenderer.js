@@ -1,5 +1,6 @@
 import { world } from '../world.js'
 import { camera } from '../camera.js'
+import { hover } from '../input/hover.js'
 
 export function renderWorld(ctx) {
   for (let y = 0; y < world.height; y++) {
@@ -36,7 +37,21 @@ export function renderWorld(ctx) {
         ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
       }
 
-      // temporary colors
+      // hover tile
+      if (hover.tile) {
+        const worldX = hover.tileX * world.tileSize
+
+        const worldY = hover.tileY * world.tileSize
+
+        const screenX = worldX - camera.x
+
+        const screenY = worldY - camera.y
+
+        ctx.strokeStyle = '#ffff00'
+        ctx.lineWidth = 3
+
+        ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
+      }
     }
   }
 }
