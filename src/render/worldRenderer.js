@@ -1,6 +1,7 @@
 import { world } from '../world.js'
 import { camera } from '../camera.js'
 import { hover } from '../input/hover.js'
+import { selection } from '../input/selection.js'
 
 export function renderWorld(ctx) {
   for (let y = 0; y < world.height; y++) {
@@ -51,6 +52,26 @@ export function renderWorld(ctx) {
           const screenY = worldY - camera.y
 
           ctx.strokeStyle = '#ffff00'
+          ctx.lineWidth = 3
+
+          ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
+        }
+      }
+
+      // select tile
+      if (selection.tile) {
+        const worldX = selection.tileX * world.tileSize
+
+        const worldY = selection.tileY * world.tileSize
+
+        const mapPixelWidth = world.getPixelWidth()
+
+        for (const offset of [-1, 0, 1]) {
+          const screenX = worldX + offset * mapPixelWidth - camera.x
+
+          const screenY = worldY - camera.y
+
+          ctx.strokeStyle = '#00ff00'
           ctx.lineWidth = 3
 
           ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
