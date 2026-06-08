@@ -3,6 +3,7 @@ import { camera } from './camera.js'
 import { world } from './world.js'
 import { updateHover } from './input/hover.js'
 import { renderDebug } from './render/debugRenderer.js'
+import { selectHoveredTile } from './input/selection.js'
 
 export const engine = {
   canvas: null,
@@ -29,6 +30,12 @@ export const engine = {
     window.addEventListener('mousemove', (event) => {
       this.mouse.x = event.clientX
       this.mouse.y = event.clientY
+    })
+
+    window.addEventListener('mousedown', (event) => {
+      if (event.button === 0) {
+        selectHoveredTile()
+      }
     })
 
     this.loop()
