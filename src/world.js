@@ -10,6 +10,8 @@ export const world = {
 
   tiles: [],
 
+  units: [],
+
   getPixelWidth() {
     return this.width * this.tileSize
   },
@@ -47,6 +49,13 @@ export const world = {
 
       this.tiles.push(row)
     }
+
+    this.units.push({
+      id: 1,
+      type: 'settler',
+      x: 10,
+      y: 10,
+    })
 
     console.log('World generated')
     console.log(this.tiles)
