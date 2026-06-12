@@ -77,6 +77,29 @@ export function renderWorld(ctx) {
           ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
         }
       }
+
+      // units
+      for (const unit of world.units) {
+        const worldX = unit.x * world.tileSize
+        const worldY = unit.y * world.tileSize
+
+        const mapPixelWidth = world.getPixelWidth()
+
+        for (const offset of [-1, 0, 1]) {
+          const screenX = worldX + offset * mapPixelWidth - camera.x
+
+          const screenY = worldY - camera.y
+
+          ctx.fillStyle = '#ffcc00'
+
+          ctx.fillRect(
+            screenX + 8,
+            screenY + 8,
+            world.tileSize - 16,
+            world.tileSize - 16,
+          )
+        }
+      }
     }
   }
 }
