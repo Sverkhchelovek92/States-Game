@@ -4,6 +4,7 @@ import { world } from './world.js'
 import { updateHover } from './input/hover.js'
 import { renderDebug } from './render/debugRenderer.js'
 import { selectHoveredTile } from './input/selection.js'
+import { selectUnitUnderCursor } from './units/unitSelection.js'
 
 export const engine = {
   canvas: null,
@@ -33,9 +34,12 @@ export const engine = {
     })
 
     window.addEventListener('mousedown', (event) => {
-      if (event.button === 0) {
-        selectHoveredTile()
+      if (event.button !== 0) {
+        return
       }
+
+      selectHoveredTile()
+      selectUnitUnderCursor()
     })
 
     this.loop()
