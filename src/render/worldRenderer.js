@@ -2,6 +2,7 @@ import { world } from '../world.js'
 import { camera } from '../camera.js'
 import { hover } from '../input/hover.js'
 import { selection } from '../input/selection.js'
+import { unitSelection } from '../units/unitSelection.js'
 
 export function renderWorld(ctx) {
   for (let y = 0; y < world.height; y++) {
@@ -97,6 +98,32 @@ export function renderWorld(ctx) {
             screenY + 8,
             world.tileSize - 16,
             world.tileSize - 16,
+          )
+        }
+      }
+
+      if (unitSelection.unit) {
+        const unit = unitSelection.unit
+
+        const worldX = unit.x * world.tileSize
+
+        const worldY = unit.y * world.tileSize
+
+        const mapPixelWidth = world.getPixelWidth()
+
+        for (const offset of [-1, 0, 1]) {
+          const screenX = worldX + offset * mapPixelWidth - camera.x
+
+          const screenY = worldY - camera.y
+
+          ctx.strokeStyle = '#00ff00'
+          ctx.lineWidth = 3
+
+          ctx.strokeRect(
+            screenX + 4,
+            screenY + 4,
+            world.tileSize - 8,
+            world.tileSize - 8,
           )
         }
       }

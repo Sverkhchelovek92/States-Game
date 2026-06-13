@@ -1,6 +1,7 @@
 import { hover } from '../input/hover.js'
 import { camera } from '../camera.js'
 import { selection } from '../input/selection.js'
+import { unitSelection } from '../units/unitSelection.js'
 
 export function renderDebug(ctx) {
   ctx.fillStyle = '#ffffff'
@@ -44,6 +45,27 @@ export function renderDebug(ctx) {
     y += 35
   }
 
+  ctx.fillText('UNIT', 10, y)
+
+  y += 25
+
+  if (unitSelection.unit) {
+    ctx.fillText(`ID: ${unitSelection.unit.id}`, 10, y)
+
+    y += 25
+
+    ctx.fillText(`Type: ${unitSelection.unit.type}`, 10, y)
+
+    y += 25
+
+    ctx.fillText(
+      `Position: ${unitSelection.unit.x}, ${unitSelection.unit.y}`,
+      10,
+      y,
+    )
+
+    y += 35
+  }
   // CAMERA
 
   ctx.fillText('CAMERA', 10, y)
