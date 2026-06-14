@@ -4,7 +4,10 @@ import { world } from './world.js'
 import { updateHover } from './input/hover.js'
 import { renderDebug } from './render/debugRenderer.js'
 import { selectHoveredTile } from './input/selection.js'
-import { selectUnitUnderCursor } from './units/unitSelection.js'
+import { hover } from './input/hover.js'
+import { getUnitAt } from './units/unitUtils.js'
+import { unitSelection, selectUnitUnderCursor } from './units/unitSelection.js'
+import { moveSelectedUnit } from './units/unitActions.js'
 
 export const engine = {
   canvas: null,
@@ -38,8 +41,22 @@ export const engine = {
         return
       }
 
+      const unitUnderCursor = getUnitAt(hover.tileX, hover.tileY)
+
+      // Click on unit
+      if (unitUnderCursor) {
+        selectUnitUnderCursor()
+        return
+      }
+
+      // If unit is already clicked
+      if (unitSelection.unit) {
+        moveSelectedUnit()
+        return
+      }
+
+      // Otherwise choose tile
       selectHoveredTile()
-      selectUnitUnderCursor()
     })
 
     this.loop()
