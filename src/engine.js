@@ -8,6 +8,8 @@ import { hover } from './input/hover.js'
 import { getUnitAt } from './units/unitUtils.js'
 import { unitSelection, selectUnitUnderCursor } from './units/unitSelection.js'
 import { moveSelectedUnit } from './units/unitActions.js'
+import { clearSelection } from './input/selection.js'
+import { clearUnitSelection } from './units/unitSelection.js'
 
 export const engine = {
   canvas: null,
@@ -57,6 +59,13 @@ export const engine = {
 
       // Otherwise choose tile
       selectHoveredTile()
+    })
+
+    window.addEventListener('contextmenu', (event) => {
+      event.preventDefault()
+
+      clearSelection()
+      clearUnitSelection()
     })
 
     this.loop()
