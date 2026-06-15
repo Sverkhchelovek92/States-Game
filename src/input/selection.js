@@ -15,3 +15,9 @@ export function selectHoveredTile() {
   selection.tileY = hover.tileY
   selection.tile = hover.tile
 }
+
+export function clearSelection() {
+  selection.tileX = null
+  selection.tileY = null
+  selection.tile = null
+}
