@@ -10,3 +10,7 @@ export function selectUnitUnderCursor() {
 
   unitSelection.unit = unit
 }
+
+export function clearUnitSelection() {
+  unitSelection.unit = null
+}
