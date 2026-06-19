@@ -2,6 +2,7 @@ import { hover } from '../input/hover.js'
 import { camera } from '../camera.js'
 import { selection } from '../input/selection.js'
 import { unitSelection } from '../units/unitSelection.js'
+import { game } from '../game/game.js'
 
 export function renderDebug(ctx) {
   ctx.fillStyle = '#ffffff'
@@ -10,6 +11,10 @@ export function renderDebug(ctx) {
   let y = 25
 
   ctx.fillText('STATES DEV BUILD', 10, y)
+
+  y += 35
+
+  ctx.fillText(`Turn: ${game.turn}`, 10, y)
 
   y += 35
 
