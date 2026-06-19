@@ -10,6 +10,7 @@ import { unitSelection, selectUnitUnderCursor } from './units/unitSelection.js'
 import { moveSelectedUnit } from './units/unitActions.js'
 import { clearSelection } from './input/selection.js'
 import { clearUnitSelection } from './units/unitSelection.js'
+import { endTurn } from './game/turnSystem.js'
 
 export const engine = {
   canvas: null,
@@ -66,6 +67,12 @@ export const engine = {
 
       clearSelection()
       clearUnitSelection()
+    })
+
+    window.addEventListener('keydown', (event) => {
+      if (event.code === 'Space') {
+        endTurn()
+      }
     })
 
     this.loop()
