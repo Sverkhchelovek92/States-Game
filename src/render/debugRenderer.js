@@ -3,6 +3,7 @@ import { camera } from '../camera.js'
 import { selection } from '../input/selection.js'
 import { unitSelection } from '../units/unitSelection.js'
 import { game } from '../game/game.js'
+import { UNIT_TYPES } from '../units/unitTypes.js'
 
 export function renderDebug(ctx) {
   ctx.fillStyle = '#ffffff'
@@ -50,24 +51,30 @@ export function renderDebug(ctx) {
     y += 35
   }
 
+  // UNIT
+
   ctx.fillText('UNIT', 10, y)
 
   y += 25
 
   if (unitSelection.unit) {
-    ctx.fillText(`ID: ${unitSelection.unit.id}`, 10, y)
+    const unit = unitSelection.unit
+
+    const unitData = UNIT_TYPES[unit.type]
+
+    ctx.fillText(`ID: ${unit.id}`, 10, y)
 
     y += 25
 
-    ctx.fillText(`Type: ${unitSelection.unit.type}`, 10, y)
+    ctx.fillText(`Name: ${unitData.name}`, 10, y)
 
     y += 25
 
-    ctx.fillText(
-      `Position: ${unitSelection.unit.x}, ${unitSelection.unit.y}`,
-      10,
-      y,
-    )
+    ctx.fillText(`Position: ${unit.x}, ${unit.y}`, 10, y)
+
+    y += 25
+
+    ctx.fillText(`Movement: ${unit.movement}/${unit.maxMovement}`, 10, y)
 
     y += 35
   }
