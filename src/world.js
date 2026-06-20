@@ -1,4 +1,5 @@
 import { MAP_SIZES } from './mapSizes.js'
+import { createUnit } from './units/unitFactory.js'
 
 const currentMapSize = MAP_SIZES.small
 
@@ -50,12 +51,7 @@ export const world = {
       this.tiles.push(row)
     }
 
-    this.units.push({
-      id: 1,
-      type: 'settler',
-      x: 10,
-      y: 10,
-    })
+    this.units.push(createUnit('settler', 10, 10))
 
     console.log('World generated')
     console.log(this.tiles)
