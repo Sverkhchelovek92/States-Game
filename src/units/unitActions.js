@@ -12,6 +12,10 @@ export function moveSelectedUnit() {
     return
   }
 
+  if (unit.x === hover.tileX && unit.y === hover.tileY) {
+    return
+  }
+
   unit.x = hover.tileX
   unit.y = hover.tileY
 
