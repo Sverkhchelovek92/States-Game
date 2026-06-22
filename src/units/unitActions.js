@@ -8,6 +8,12 @@ export function moveSelectedUnit() {
     return
   }
 
+  if (unit.movement <= 0) {
+    return
+  }
+
   unit.x = hover.tileX
   unit.y = hover.tileY
+
+  unit.movement--
 }
