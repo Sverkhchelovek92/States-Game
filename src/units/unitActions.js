@@ -1,5 +1,6 @@
 import { unitSelection } from './unitSelection.js'
 import { hover } from '../input/hover.js'
+import { getUnitAt } from './unitUtils.js'
 
 export function moveSelectedUnit() {
   const unit = unitSelection.unit

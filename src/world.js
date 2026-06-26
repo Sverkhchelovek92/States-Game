@@ -23,6 +23,7 @@ export const world = {
 
   generate() {
     this.tiles = []
+    this.units = []
 
     for (let y = 0; y < this.height; y++) {
       const row = []
