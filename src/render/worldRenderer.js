@@ -92,7 +92,9 @@ export function renderWorld(ctx) {
 
           const screenY = worldY - camera.y
 
-          ctx.fillStyle = '#ffcc00'
+          const unitType = UNIT_TYPES[unit.type]
+
+          ctx.fillStyle = unitType.color
 
           ctx.fillRect(
             screenX + 8,

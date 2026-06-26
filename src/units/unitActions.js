@@ -16,6 +16,12 @@ export function moveSelectedUnit() {
     return
   }
 
+  const unitOnTarget = getUnitAt(hover.tileX, hover.tileY)
+
+  if (unitOnTarget) {
+    return
+  }
+
   unit.x = hover.tileX
   unit.y = hover.tileY
 

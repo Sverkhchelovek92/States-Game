@@ -51,7 +51,11 @@ export const world = {
       this.tiles.push(row)
     }
 
-    this.units.push(createUnit('settler', 10, 10))
+    this.units.push(createUnit('settler', 10, 10, 1))
+
+    this.units.push(createUnit('warrior', 11, 10, 1))
+
+    this.units.push(createUnit('warrior', 13, 10, 1))
 
     console.log('World generated')
     console.log(this.tiles)
