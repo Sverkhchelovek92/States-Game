@@ -2,6 +2,8 @@ export const UNIT_TYPES = {
   settler: {
     name: 'Settler',
 
+    color: '#f4d03f',
+
     movement: 1,
     vision: 2,
 
@@ -11,6 +13,8 @@ export const UNIT_TYPES = {
 
   warrior: {
     name: 'Warrior',
+
+    color: '#c0392b',
 
     movement: 1,
     vision: 2,
