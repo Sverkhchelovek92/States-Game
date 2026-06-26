@@ -3,6 +3,7 @@ import { camera } from '../camera.js'
 import { hover } from '../input/hover.js'
 import { selection } from '../input/selection.js'
 import { unitSelection } from '../units/unitSelection.js'
+import { UNIT_TYPES } from '../units/unitTypes.js'
 
 export function renderWorld(ctx) {
   for (let y = 0; y < world.height; y++) {
@@ -116,7 +117,9 @@ export function renderWorld(ctx) {
 
           const screenY = worldY - camera.y
 
-          ctx.strokeStyle = '#00ff00'
+          const unitType = UNIT_TYPES[unit.type]
+
+          ctx.fillStyle = unitType.color
           ctx.lineWidth = 3
 
           ctx.strokeRect(
