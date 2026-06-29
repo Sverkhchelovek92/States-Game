@@ -4,6 +4,7 @@ import { hover } from '../input/hover.js'
 import { selection } from '../input/selection.js'
 import { unitSelection } from '../units/unitSelection.js'
 import { UNIT_TYPES } from '../units/unitTypes.js'
+import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 
 export function renderWorld(ctx) {
   drawTiles(ctx)
@@ -27,19 +28,9 @@ function drawTiles(ctx) {
         const screenX = worldX + offset * mapPixelWidth - camera.x
         const screenY = worldY - camera.y
 
-        switch (tile.type) {
-          case 'grass':
-            ctx.fillStyle = '#4caf50'
-            break
+        const terrain = TERRAIN_TYPES[tile.type]
 
-          case 'water':
-            ctx.fillStyle = '#2196f3'
-            break
-
-          case 'forest':
-            ctx.fillStyle = '#2e7d32'
-            break
-        }
+        ctx.fillStyle = terrain.color
 
         ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
 
