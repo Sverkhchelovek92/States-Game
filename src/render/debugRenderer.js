@@ -4,6 +4,7 @@ import { selection } from '../input/selection.js'
 import { unitSelection } from '../units/unitSelection.js'
 import { game } from '../game/game.js'
 import { UNIT_TYPES } from '../units/unitTypes.js'
+import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 
 export function renderDebug(ctx) {
   ctx.fillStyle = '#ffffff'
@@ -30,7 +31,9 @@ export function renderDebug(ctx) {
 
     y += 25
 
-    ctx.fillText(`Terrain: ${hover.tile.type}`, 10, y)
+    const terrain = TERRAIN_TYPES[hover.tile.type]
+
+    ctx.fillText(`Terrain: ${terrain.name}`, 10, y)
 
     y += 35
   }
@@ -46,7 +49,9 @@ export function renderDebug(ctx) {
 
     y += 25
 
-    ctx.fillText(`Terrain: ${selection.tile.type}`, 10, y)
+    const terrain = TERRAIN_TYPES[hover.tile.type]
+
+    ctx.fillText(`Terrain: ${terrain.name}`, 10, y)
 
     y += 35
   }
