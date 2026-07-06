@@ -15,11 +15,11 @@ export const world = {
   units: [],
 
   getPixelWidth() {
-    return this.width * camera.getTileSize()
+    return this.width * world.tileSize
   },
 
   getPixelHeight() {
-    return this.height * camera.getTileSize()
+    return this.height * world.tileSize
   },
 
   getLatitude(y) {
@@ -43,6 +43,10 @@ export const world = {
         const random = Math.random()
 
         let type = 'grass'
+
+        if (distanceFromEquator > 0.9) {
+          type = 'snow'
+        }
 
         if (random < 0.15) {
           type = 'water'
