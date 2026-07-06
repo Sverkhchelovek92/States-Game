@@ -28,4 +28,14 @@ export const TERRAIN_TYPES = {
 
     passable: false,
   },
+
+  snow: {
+    name: 'Snow',
+
+    color: '#f5f5f5',
+
+    movementCost: 1,
+
+    passable: true,
+  },
 }
