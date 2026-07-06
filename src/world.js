@@ -1,5 +1,6 @@
 import { MAP_SIZES } from './mapSizes.js'
 import { createUnit } from './units/unitFactory.js'
+import { camera } from './camera.js'
 
 const currentMapSize = MAP_SIZES.small
 
@@ -14,11 +15,15 @@ export const world = {
   units: [],
 
   getPixelWidth() {
-    return this.width * this.tileSize
+    return this.width * camera.getTileSize()
   },
 
   getPixelHeight() {
-    return this.height * this.tileSize
+    return this.height * camera.getTileSize()
+  },
+
+  getLatitude(y) {
+    return y / (this.height - 1)
   },
 
   generate() {
