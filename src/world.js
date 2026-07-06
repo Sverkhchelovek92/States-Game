@@ -34,6 +34,11 @@ export const world = {
       const row = []
 
       for (let x = 0; x < this.width; x++) {
+        // latitude
+        const latitude = this.getLatitude(y)
+
+        const distanceFromEquator = Math.abs(latitude - 0.5) * 2
+
         // temporary random terrain
         const random = Math.random()
 
