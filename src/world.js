@@ -66,6 +66,16 @@ export const world = {
     }
   },
 
+  generateUnits() {
+    this.units = []
+
+    this.units.push(createUnit('settler', 10, 10, 1))
+
+    this.units.push(createUnit('warrior', 11, 10, 1))
+
+    this.units.push(createUnit('warrior', 13, 10, 1))
+  },
+
   generate() {
     this.tiles = []
     this.units = []
