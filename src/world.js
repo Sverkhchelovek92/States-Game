@@ -26,6 +26,30 @@ export const world = {
     return y / (this.height - 1)
   },
 
+  getTerrainType(x, y) {
+    const latitude = this.getLatitude(y)
+
+    const distanceFromEquator = Math.abs(latitude - 0.5) * 2
+
+    const random = Math.random()
+
+    const isLand = random >= 0.15
+
+    if (!isLand) {
+      return 'water'
+    }
+
+    if (distanceFromEquator > 0.9) {
+      return 'snow'
+    }
+
+    if (random > 0.85) {
+      return 'forest'
+    }
+
+    return 'grass'
+  },
+
   generateTerrain() {
     this.tiles = []
 
@@ -33,34 +57,10 @@ export const world = {
       const row = []
 
       for (let x = 0; x < this.width; x++) {
-        // latitude
-        const latitude = this.getLatitude(y)
-
-        const distanceFromEquator = Math.abs(latitude - 0.5) * 2
-
-        // temporary random terrain
-        const random = Math.random()
-
-        const isLand = random >= 0.15
-
-        let type = 'grass'
-
-        if (!isLand) {
-          type = 'water'
-        } else {
-          if (distanceFromEquator > 0.9) {
-            type = 'snow'
-          } else if (random > 0.85) {
-            type = 'forest'
-          } else {
-            type = 'grass'
-          }
-        }
-
         row.push({
           x,
           y,
-          type,
+          type: this.getTerrainType(x, y),
         })
       }
 
