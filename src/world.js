@@ -41,18 +41,20 @@ export const world = {
         // temporary random terrain
         const random = Math.random()
 
+        const isLand = random >= 0.15
+
         let type = 'grass'
 
-        if (distanceFromEquator > 0.9) {
-          type = 'snow'
-        }
-
-        if (random < 0.15) {
+        if (!isLand) {
           type = 'water'
-        }
-
-        if (random > 0.85) {
-          type = 'forest'
+        } else {
+          if (distanceFromEquator > 0.9) {
+            type = 'snow'
+          } else if (random > 0.85) {
+            type = 'forest'
+          } else {
+            type = 'grass'
+          }
         }
 
         row.push({
