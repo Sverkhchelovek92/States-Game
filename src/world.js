@@ -5,8 +5,8 @@ import { camera } from './camera.js'
 const currentMapSize = MAP_SIZES.small
 
 export const world = {
-  width: MAP_SIZES.small.width,
-  height: MAP_SIZES.small.height,
+  width: currentMapSize.width,
+  height: currentMapSize.height,
 
   tileSize: 32,
 
