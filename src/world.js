@@ -51,6 +51,8 @@ export const world = {
 
     const distanceFromEquator = Math.abs(latitude - 0.5) * 2
 
+    const climate = this.getClimate(y)
+
     const random = Math.random()
 
     const isLand = random >= 0.15
@@ -59,7 +61,7 @@ export const world = {
       return 'water'
     }
 
-    if (distanceFromEquator > 0.9) {
+    if (climate === 'polar') {
       return 'snow'
     }
 
