@@ -1,6 +1,7 @@
 import { MAP_SIZES } from './mapSizes.js'
 import { createUnit } from './units/unitFactory.js'
 import { camera } from './camera.js'
+import { CLIMATE_TYPES } from './world/climateTypes.js'
 
 const currentMapSize = MAP_SIZES.small
 
@@ -32,18 +33,18 @@ export const world = {
     const distanceFromEquator = Math.abs(latitude - 0.5) * 2
 
     if (distanceFromEquator > 0.9) {
-      return 'polar'
+      return CLIMATE_TYPES.polar
     }
 
     if (distanceFromEquator > 0.7) {
-      return 'subpolar'
+      return CLIMATE_TYPES.subpolar
     }
 
     if (distanceFromEquator > 0.3) {
-      return 'temperate'
+      return CLIMATE_TYPES.temperate
     }
 
-    return 'tropical'
+    return CLIMATE_TYPES.tropical
   },
 
   getTerrainType(x, y) {
@@ -61,7 +62,7 @@ export const world = {
       return 'water'
     }
 
-    if (climate === 'polar') {
+    if (climate === CLIMATE_TYPES.polar) {
       return 'snow'
     }
 
