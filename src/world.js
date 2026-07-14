@@ -26,6 +26,26 @@ export const world = {
     return y / (this.height - 1)
   },
 
+  getClimate(y) {
+    const latitude = this.getLatitude(y)
+
+    const distanceFromEquator = Math.abs(latitude - 0.5) * 2
+
+    if (distanceFromEquator > 0.9) {
+      return 'polar'
+    }
+
+    if (distanceFromEquator > 0.7) {
+      return 'subpolar'
+    }
+
+    if (distanceFromEquator > 0.3) {
+      return 'temperate'
+    }
+
+    return 'tropical'
+  },
+
   getTerrainType(x, y) {
     const latitude = this.getLatitude(y)
 
