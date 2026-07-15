@@ -56,9 +56,9 @@ export const world = {
 
     const climate = this.getClimate(y)
 
-    const random = Math.random()
+    const isLand = this.landMap[y][x]
 
-    const isLand = random >= 0.15
+    const random = Math.random()
 
     if (!isLand) {
       return 'water'
@@ -118,6 +118,8 @@ export const world = {
   },
 
   generate() {
+    this.generateLandMap()
+
     this.generateTerrain()
 
     this.generateUnits()
