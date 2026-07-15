@@ -93,6 +93,20 @@ export const world = {
     }
   },
 
+  generateLandMap() {
+    this.landMap = []
+
+    for (let y = 0; y < this.height; y++) {
+      const row = []
+
+      for (let x = 0; x < this.width; x++) {
+        row.push(Math.random() > 0.45)
+      }
+
+      this.landMap.push(row)
+    }
+  },
+
   generateUnits() {
     this.units = []
 
