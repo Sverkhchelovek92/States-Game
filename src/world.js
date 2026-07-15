@@ -13,6 +13,8 @@ export const world = {
 
   tiles: [],
 
+  landMap: [],
+
   units: [],
 
   getPixelWidth() {
