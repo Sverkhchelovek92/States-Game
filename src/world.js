@@ -107,6 +107,28 @@ export const world = {
     }
   },
 
+  smoothLandMap() {
+    const newLandMap = []
+
+    for (let y = 0; y < this.height; y++) {
+      const row = []
+
+      for (let x = 0; x < this.width; x++) {
+        const landNeighbors = this.countLandNeighbors(x, y)
+
+        if (landNeighbors >= 5) {
+          row.push(true)
+        } else {
+          row.push(false)
+        }
+      }
+
+      newLandMap.push(row)
+    }
+
+    this.landMap = newLandMap
+  },
+
   generateUnits() {
     this.units = []
 
