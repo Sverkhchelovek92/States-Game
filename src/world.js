@@ -176,6 +176,8 @@ export const world = {
   generate() {
     this.generateLandMap()
 
+    this.smoothLandMap()
+
     this.generateTerrain()
 
     this.generateUnits()
