@@ -129,6 +129,40 @@ export const world = {
     this.landMap = newLandMap
   },
 
+  countLandNeighbors(x, y) {
+    let count = 0
+
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        if (dx === 0 && dy === 0) {
+          continue
+        }
+
+        let nx = x + dx
+        let ny = y + dy
+
+        // World wrapping по X
+        if (nx < 0) {
+          nx = this.width - 1
+        }
+
+        if (nx >= this.width) {
+          nx = 0
+        }
+
+        if (ny < 0 || ny >= this.height) {
+          continue
+        }
+
+        if (this.landMap[ny][nx]) {
+          count++
+        }
+      }
+    }
+
+    return count
+  },
+
   generateUnits() {
     this.units = []
 
