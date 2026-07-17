@@ -35,25 +35,21 @@ export const world = {
     const distanceFromEquator = Math.abs(latitude - 0.5) * 2
 
     if (distanceFromEquator > 0.9) {
-      return CLIMATE_TYPES.polar
+      return 'polar'
     }
 
     if (distanceFromEquator > 0.7) {
-      return CLIMATE_TYPES.subpolar
+      return 'subpolar'
     }
 
     if (distanceFromEquator > 0.3) {
-      return CLIMATE_TYPES.temperate
+      return 'temperate'
     }
 
-    return CLIMATE_TYPES.tropical
+    return 'tropical'
   },
 
   getTerrainType(x, y) {
-    const latitude = this.getLatitude(y)
-
-    const distanceFromEquator = Math.abs(latitude - 0.5) * 2
-
     const climate = this.getClimate(y)
 
     const isLand = this.landMap[y][x]
@@ -64,15 +60,35 @@ export const world = {
       return 'water'
     }
 
-    if (climate === CLIMATE_TYPES.polar) {
-      return 'snow'
-    }
+    switch (climate) {
+      case 'polar':
+        return 'snow'
 
-    if (random > 0.85) {
-      return 'forest'
-    }
+      case 'subpolar':
+        if (random < 0.7) {
+          return 'tundra'
+        }
 
-    return 'grass'
+        return 'forest'
+
+      case 'temperate':
+        if (random < 0.3) {
+          return 'forest'
+        }
+
+        return 'grass'
+
+      case 'tropical':
+        if (random < 0.35) {
+          return 'forest'
+        }
+
+        if (random > 0.9) {
+          return 'desert'
+        }
+
+        return 'grass'
+    }
   },
 
   generateTerrain() {
