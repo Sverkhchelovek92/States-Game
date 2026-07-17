@@ -38,4 +38,20 @@ export const TERRAIN_TYPES = {
 
     passable: true,
   },
+
+  tundra: {
+    name: 'Tundra',
+    color: '#8fa87a',
+    movementCost: 1,
+
+    passable: true,
+  },
+
+  desert: {
+    name: 'Desert',
+    color: '#d8c27a',
+    movementCost: 1,
+
+    passable: true,
+  },
 }
