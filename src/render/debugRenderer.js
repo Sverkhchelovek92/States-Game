@@ -5,6 +5,7 @@ import { unitSelection } from '../units/unitSelection.js'
 import { game } from '../game/game.js'
 import { UNIT_TYPES } from '../units/unitTypes.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
+import { world } from '../world.js'
 
 export function renderDebug(ctx) {
   ctx.fillStyle = '#ffffff'
@@ -28,6 +29,12 @@ export function renderDebug(ctx) {
 
   if (hover.tile) {
     ctx.fillText(`Tile: ${hover.tileX}, ${hover.tileY}`, 10, y)
+
+    y += 25
+
+    const climate = world.getClimate(hover.tileY)
+
+    ctx.fillText(`Climate: ${climate}`, 10, y)
 
     y += 25
 
