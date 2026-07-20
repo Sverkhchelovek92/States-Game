@@ -2,6 +2,7 @@ import { MAP_SIZES } from './mapSizes.js'
 import { createUnit } from './units/unitFactory.js'
 import { camera } from './camera.js'
 import { CLIMATE_TYPES } from './world/climateTypes.js'
+import { generateStartingPosition } from './world/startingPositions.js'
 
 const currentMapSize = MAP_SIZES.small
 
@@ -182,11 +183,17 @@ export const world = {
   generateUnits() {
     this.units = []
 
-    this.units.push(createUnit('settler', 10, 10, 1))
+    const start = generateStartingPosition(this)
 
-    this.units.push(createUnit('warrior', 11, 10, 1))
+    this.units.push(createUnit('settler', start.x, start.y, 1))
 
-    this.units.push(createUnit('warrior', 13, 10, 1))
+    this.units.push(
+      createUnit('warrior', (start.x + 1) % this.width, start.y, 1),
+    )
+
+    this.units.push(
+      createUnit('warrior', (start.x + 2) % this.width, start.y, 1),
+    )
   },
 
   generate() {
