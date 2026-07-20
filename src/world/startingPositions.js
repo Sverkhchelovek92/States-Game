@@ -16,3 +16,17 @@ export function generateStartingPosition(world) {
     return { x, y }
   }
 }
+
+function hasEnoughSpace(world, x, y) {
+  for (let offset = 0; offset < 3; offset++) {
+    const checkX = (x + offset) % world.width
+
+    const tile = world.tiles[y][checkX]
+
+    if (tile.type === 'water') {
+      return false
+    }
+  }
+
+  return true
+}
