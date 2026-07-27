@@ -49,6 +49,8 @@ function drawTiles(ctx) {
 function drawElevation(ctx) {
   const mapPixelWidth = world.getPixelWidth()
 
+  ctx.save()
+
   ctx.fillStyle = '#222'
   ctx.font = '18px Arial'
   ctx.textAlign = 'center'
@@ -87,6 +89,8 @@ function drawElevation(ctx) {
       }
     }
   }
+
+  ctx.restore()
 }
 
 function drawHover(ctx) {

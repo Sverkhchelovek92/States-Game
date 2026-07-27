@@ -5,9 +5,12 @@ import { unitSelection } from '../units/unitSelection.js'
 import { game } from '../game/game.js'
 import { UNIT_TYPES } from '../units/unitTypes.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
+import { ELEVATION_TYPES } from '../world/elevationTypes.js'
 import { world } from '../world.js'
 
 export function renderDebug(ctx) {
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'alphabetic'
   ctx.fillStyle = '#ffffff'
   ctx.font = '16px Arial'
 
@@ -42,7 +45,15 @@ export function renderDebug(ctx) {
 
     ctx.fillText(`Terrain: ${terrain.name}`, 10, y)
 
-    y += 35
+    y += 15
+
+    const elevation = ELEVATION_TYPES[hover.tile.elevation]
+
+    y += 25
+
+    ctx.fillText(`Elevation: ${elevation.name}`, 10, y)
+
+    y += 25
   }
 
   // SELECTION
