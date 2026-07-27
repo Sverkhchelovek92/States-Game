@@ -26,6 +26,14 @@ function hasEnoughSpace(world, x, y) {
     if (tile.type === 'water') {
       return false
     }
+
+    if (tile.type === 'snow') {
+      return false
+    }
+
+    if (tile.type === 'desert') {
+      return false
+    }
   }
 
   return true
