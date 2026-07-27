@@ -92,6 +92,20 @@ export const world = {
     }
   },
 
+  getElevationType() {
+    const random = Math.random()
+
+    if (random < 0.08) {
+      return 'mountain'
+    }
+
+    if (random < 0.25) {
+      return 'hill'
+    }
+
+    return 'flat'
+  },
+
   generateTerrain() {
     this.tiles = []
 
