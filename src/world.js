@@ -113,10 +113,16 @@ export const world = {
       const row = []
 
       for (let x = 0; x < this.width; x++) {
+        const terrain = this.getTerrainType(x, y)
+
+        const elevation = terrain === 'water' ? 'flat' : this.getElevationType()
+
         row.push({
           x,
           y,
-          type: this.getTerrainType(x, y),
+
+          type: terrain,
+          elevation,
         })
       }
 
