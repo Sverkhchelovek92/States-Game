@@ -121,7 +121,7 @@ export const world = {
           x,
           y,
 
-          type: terrain,
+          terrain,
           elevation,
         })
       }

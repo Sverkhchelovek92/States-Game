@@ -41,7 +41,7 @@ export function renderDebug(ctx) {
 
     y += 25
 
-    const terrain = TERRAIN_TYPES[hover.tile.type]
+    const terrain = TERRAIN_TYPES[hover.tile.terrain]
 
     ctx.fillText(`Terrain: ${terrain.name}`, 10, y)
 
@@ -67,7 +67,7 @@ export function renderDebug(ctx) {
 
     y += 25
 
-    const terrain = TERRAIN_TYPES[hover.tile.type]
+    const terrain = TERRAIN_TYPES[hover.tile.terrain]
 
     ctx.fillText(`Terrain: ${terrain.name}`, 10, y)
 

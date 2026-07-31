@@ -5,11 +5,11 @@ export function generateStartingPosition(world) {
 
     const tile = world.tiles[y][x]
 
-    if (tile.type === 'water') {
+    if (tile.terrain === 'water') {
       continue
     }
 
-    if (tile.type === 'snow') {
+    if (tile.terrain === 'snow') {
       continue
     }
 
@@ -23,15 +23,15 @@ function hasEnoughSpace(world, x, y) {
 
     const tile = world.tiles[y][checkX]
 
-    if (tile.type === 'water') {
+    if (tile.terrain === 'water') {
       return false
     }
 
-    if (tile.type === 'snow') {
+    if (tile.terrain === 'snow') {
       return false
     }
 
-    if (tile.type === 'desert') {
+    if (tile.terrain === 'desert') {
       return false
     }
   }

@@ -32,7 +32,7 @@ function drawTiles(ctx) {
         const screenX = worldX + offset * mapPixelWidth - camera.x
         const screenY = worldY - camera.y
 
-        const terrain = TERRAIN_TYPES[tile.type]
+        const terrain = TERRAIN_TYPES[tile.terrain]
 
         ctx.fillStyle = terrain.color
 
