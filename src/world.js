@@ -123,6 +123,8 @@ export const world = {
 
           terrain,
           elevation,
+
+          resource: null,
         })
       }
 
