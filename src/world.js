@@ -4,10 +4,11 @@ import { camera } from './camera.js'
 import { CLIMATE_TYPES } from './world/climateTypes.js'
 import { generateStartingPosition } from './world/startingPositions.js'
 import { RESOURCE_TYPES } from './world/resourceTypes.js'
+import { WORLD_SETTINGS } from './world/worldSettings.js'
 
 const currentMapSize = MAP_SIZES.small
 
-const RESOURCE_CHANCE = 0.08
+// const RESOURCE_CHANCE = 0.08
 
 export const world = {
   width: currentMapSize.width,
@@ -226,7 +227,7 @@ export const world = {
       for (let x = 0; x < this.width; x++) {
         const tile = this.tiles[y][x]
 
-        if (Math.random() > RESOURCE_CHANCE) {
+        if (Math.random() > WORLD_SETTINGS.resourceChance) {
           continue
         }
 
