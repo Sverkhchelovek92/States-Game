@@ -3,6 +3,7 @@ import { createUnit } from './units/unitFactory.js'
 import { camera } from './camera.js'
 import { CLIMATE_TYPES } from './world/climateTypes.js'
 import { generateStartingPosition } from './world/startingPositions.js'
+import { RESOURCE_TYPES } from './world/resourceTypes.js'
 
 const currentMapSize = MAP_SIZES.small
 
@@ -218,12 +219,48 @@ export const world = {
     )
   },
 
+  generateResources() {
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        const tile = this.tiles[y][x]
+
+        if (Math.random() > 0.08) {
+          continue
+        }
+
+        const possibleResources = []
+
+        for (const resourceId in RESOURCE_TYPES) {
+          const resource = RESOURCE_TYPES[resourceId]
+
+          const validTerrain = resource.terrains.includes(tile.terrain)
+
+          const validElevation = resource.elevations.includes(tile.elevation)
+
+          if (validTerrain && validElevation) {
+            possibleResources.push(resourceId)
+          }
+        }
+
+        if (possibleResources.length === 0) {
+          continue
+        }
+
+        const randomIndex = Math.floor(Math.random() * possibleResources.length)
+
+        tile.resource = possibleResources[randomIndex]
+      }
+    }
+  },
+
   generate() {
     this.generateLandMap()
 
     this.smoothLandMap()
 
     this.generateTerrain()
+
+    this.generateResources()
 
     this.generateUnits()
 
