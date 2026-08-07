@@ -2,7 +2,7 @@ export const RESOURCE_TYPES = {
   wheat: {
     name: 'Wheat',
 
-    symbol: '🌾',
+    symbol: 'W',
 
     terrains: ['grass'],
 
@@ -12,7 +12,7 @@ export const RESOURCE_TYPES = {
   horse: {
     name: 'Horse',
 
-    symbol: '🐎',
+    symbol: 'H',
 
     terrains: ['grass'],
 
@@ -22,7 +22,7 @@ export const RESOURCE_TYPES = {
   iron: {
     name: 'Iron',
 
-    symbol: '⛏',
+    symbol: 'I',
 
     terrains: ['grass', 'tundra', 'desert'],
 
@@ -32,7 +32,7 @@ export const RESOURCE_TYPES = {
   fish: {
     name: 'Fish',
 
-    symbol: '🐟',
+    symbol: 'F',
 
     terrains: ['water'],
 
@@ -42,7 +42,7 @@ export const RESOURCE_TYPES = {
   gold: {
     name: 'Gold',
 
-    symbol: '💰',
+    symbol: 'G',
 
     terrains: ['desert', 'hill'],
 

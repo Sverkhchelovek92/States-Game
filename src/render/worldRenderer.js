@@ -5,11 +5,14 @@ import { selection } from '../input/selection.js'
 import { unitSelection } from '../units/unitSelection.js'
 import { UNIT_TYPES } from '../units/unitTypes.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
+import { RESOURCE_TYPES } from '../world/resourceTypes.js'
 
 export function renderWorld(ctx) {
   drawTiles(ctx)
 
   drawElevation(ctx)
+
+  drawResources(ctx)
 
   drawHover(ctx)
   drawSelection(ctx)
@@ -83,6 +86,45 @@ function drawElevation(ctx) {
 
         ctx.fillText(
           symbol,
+          screenX + world.tileSize / 2,
+          screenY + world.tileSize / 2,
+        )
+      }
+    }
+  }
+
+  ctx.restore()
+}
+
+function drawResources(ctx) {
+  const mapPixelWidth = world.getPixelWidth()
+
+  ctx.save()
+
+  ctx.font = '14px Arial'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillStyle = '#000000'
+
+  for (let y = 0; y < world.height; y++) {
+    for (let x = 0; x < world.width; x++) {
+      const tile = world.tiles[y][x]
+
+      if (!tile.resource) {
+        continue
+      }
+
+      const resource = RESOURCE_TYPES[tile.resource]
+
+      const worldX = x * world.tileSize
+      const worldY = y * world.tileSize
+
+      for (const offset of [-1, 0, 1]) {
+        const screenX = worldX + offset * mapPixelWidth - camera.x
+        const screenY = worldY - camera.y
+
+        ctx.fillText(
+          resource.symbol,
           screenX + world.tileSize / 2,
           screenY + world.tileSize / 2,
         )
