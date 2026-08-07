@@ -7,6 +7,8 @@ import { RESOURCE_TYPES } from './world/resourceTypes.js'
 
 const currentMapSize = MAP_SIZES.small
 
+const RESOURCE_CHANCE = 0.08
+
 export const world = {
   width: currentMapSize.width,
   height: currentMapSize.height,
@@ -224,7 +226,7 @@ export const world = {
       for (let x = 0; x < this.width; x++) {
         const tile = this.tiles[y][x]
 
-        if (Math.random() > 0.08) {
+        if (Math.random() > RESOURCE_CHANCE) {
           continue
         }
 
