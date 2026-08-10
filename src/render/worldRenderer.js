@@ -104,7 +104,6 @@ function drawResources(ctx) {
   ctx.font = '14px Arial'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
-  ctx.fillStyle = '#000000'
 
   for (let y = 0; y < world.height; y++) {
     for (let x = 0; x < world.width; x++) {
@@ -115,6 +114,8 @@ function drawResources(ctx) {
       }
 
       const resource = RESOURCE_TYPES[tile.resource]
+
+      ctx.fillStyle = resource.color
 
       const worldX = x * world.tileSize
       const worldY = y * world.tileSize

@@ -4,6 +4,8 @@ export const RESOURCE_TYPES = {
 
     symbol: 'W',
 
+    color: '#f5d742',
+
     terrains: ['grass'],
 
     elevations: ['flat', 'hill'],
@@ -13,6 +15,8 @@ export const RESOURCE_TYPES = {
     name: 'Horse',
 
     symbol: 'H',
+
+    color: '#8b4513',
 
     terrains: ['grass'],
 
@@ -24,6 +28,8 @@ export const RESOURCE_TYPES = {
 
     symbol: 'I',
 
+    color: '#eeeeee',
+
     terrains: ['grass', 'tundra', 'desert'],
 
     elevations: ['hill', 'mountain'],
@@ -33,6 +39,8 @@ export const RESOURCE_TYPES = {
     name: 'Fish',
 
     symbol: 'F',
+
+    color: '#00bfff',
 
     terrains: ['water'],
 
@@ -44,7 +52,9 @@ export const RESOURCE_TYPES = {
 
     symbol: 'G',
 
-    terrains: ['desert', 'hill'],
+    color: '#ffd700',
+
+    terrains: ['desert', 'grass'],
 
     elevations: ['hill', 'mountain'],
   },
