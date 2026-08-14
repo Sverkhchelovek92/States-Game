@@ -4,7 +4,7 @@ export const UNIT_TYPES = {
 
     color: '#f4d03f',
 
-    movement: 1,
+    movement: 2,
     vision: 2,
 
     attack: 0,
@@ -16,7 +16,7 @@ export const UNIT_TYPES = {
 
     color: '#c0392b',
 
-    movement: 1,
+    movement: 2,
     vision: 2,
 
     attack: 1,
