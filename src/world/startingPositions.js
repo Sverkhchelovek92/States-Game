@@ -1,3 +1,5 @@
+import { getMovementCost } from './movement.js'
+
 export function generateStartingPosition(world) {
   while (true) {
     const x = Math.floor(Math.random() * world.width)
@@ -5,11 +7,11 @@ export function generateStartingPosition(world) {
 
     const tile = world.tiles[y][x]
 
-    if (tile.terrain === 'water') {
+    if (!Number.isFinite(getMovementCost(tile))) {
       continue
     }
 
-    if (tile.terrain === 'snow') {
+    if (!hasEnoughSpace(world, x, y)) {
       continue
     }
 
@@ -23,11 +25,7 @@ function hasEnoughSpace(world, x, y) {
 
     const tile = world.tiles[y][checkX]
 
-    if (tile.terrain === 'water') {
-      return false
-    }
-
-    if (tile.terrain === 'snow') {
+    if (!Number.isFinite(getMovementCost(tile))) {
       return false
     }
 
