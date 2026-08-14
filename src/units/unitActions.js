@@ -1,6 +1,8 @@
 import { unitSelection } from './unitSelection.js'
 import { hover } from '../input/hover.js'
 import { getUnitAt } from './unitUtils.js'
+import { getMovementCost } from '../world/movement.js'
+import { world } from '../world.js'
 
 export function moveSelectedUnit() {
   const unit = unitSelection.unit
@@ -23,8 +25,16 @@ export function moveSelectedUnit() {
     return
   }
 
+  const targetTile = world.tiles[hover.tileY][hover.tileX]
+
+  const movementCost = getMovementCost(targetTile)
+
+  if (unit.movement < movementCost) {
+    return
+  }
+
   unit.x = hover.tileX
   unit.y = hover.tileY
 
-  unit.movement--
+  unit.movement -= movementCost
 }
