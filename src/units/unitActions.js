@@ -19,6 +19,10 @@ export function moveSelectedUnit() {
     return
   }
 
+  if (!isAdjacent(unit, hover.tileX, hover.tileY)) {
+    return
+  }
+
   const unitOnTarget = getUnitAt(hover.tileX, hover.tileY)
 
   if (unitOnTarget) {
@@ -37,4 +41,13 @@ export function moveSelectedUnit() {
   unit.y = hover.tileY
 
   unit.movement -= movementCost
+}
+
+function isAdjacent(unit, targetX, targetY) {
+  const dx = Math.abs(targetX - unit.x)
+  const dy = Math.abs(targetY - unit.y)
+
+  const wrappedDx = Math.min(dx, world.width - dx)
+
+  return wrappedDx <= 1 && dy <= 1
 }
