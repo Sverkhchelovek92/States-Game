@@ -6,6 +6,7 @@ import { unitSelection } from '../units/unitSelection.js'
 import { UNIT_TYPES } from '../units/unitTypes.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 import { RESOURCE_TYPES } from '../world/resourceTypes.js'
+import { getAvailableMoves } from '../units/unitMovement.js'
 
 export function renderWorld(ctx) {
   drawTiles(ctx)
@@ -13,6 +14,8 @@ export function renderWorld(ctx) {
   drawElevation(ctx)
 
   drawResources(ctx)
+
+  drawAvailableMoves(ctx)
 
   drawHover(ctx)
   drawSelection(ctx)
@@ -130,6 +133,34 @@ function drawResources(ctx) {
           screenY + world.tileSize / 2,
         )
       }
+    }
+  }
+
+  ctx.restore()
+}
+
+function drawAvailableMoves(ctx) {
+  if (!unitSelection.unit) {
+    return
+  }
+
+  const moves = getAvailableMoves(unitSelection.unit)
+  const mapPixelWidth = world.getPixelWidth()
+
+  ctx.save()
+
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.25)'
+
+  for (const move of moves) {
+    const worldX = move.x * world.tileSize
+    const worldY = move.y * world.tileSize
+
+    for (const offset of [-1, 0, 1]) {
+      const screenX = worldX + offset * mapPixelWidth - camera.x
+
+      const screenY = worldY - camera.y
+
+      ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
     }
   }
 
