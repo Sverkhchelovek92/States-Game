@@ -7,6 +7,10 @@ export function getMovementCost(tile) {
     return Infinity
   }
 
+  if (!terrain.passable) {
+    return Infinity
+  }
+
   let cost = terrain.movementCost
 
   if (tile.elevation === 'hill') {
