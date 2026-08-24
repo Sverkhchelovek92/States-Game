@@ -1,4 +1,4 @@
-import { world } from './world.js'
+import { world } from '../world.js'
 
 export function getNeighbors(x, y) {
   const neighbors = []
