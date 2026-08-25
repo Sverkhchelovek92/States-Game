@@ -47,3 +47,13 @@ function reconstructPath(node) {
 function getKey(x, y) {
   return `${x},${y}`
 }
+
+function heuristic(x, y, targetX, targetY) {
+  const dx = Math.abs(targetX - x)
+  const dy = Math.abs(targetY - y)
+
+  // Horisontal Wrap
+  const wrappedDx = Math.min(dx, world.width - dx)
+
+  return Math.max(wrappedDx, dy)
+}
