@@ -11,6 +11,7 @@ import { moveSelectedUnit } from './units/unitActions.js'
 import { clearSelection } from './input/selection.js'
 import { clearUnitSelection } from './units/unitSelection.js'
 import { endTurn } from './game/turnSystem.js'
+import { movementState } from './units/unitMovement.js'
 
 export const engine = {
   canvas: null,
@@ -64,6 +65,8 @@ export const engine = {
 
     window.addEventListener('contextmenu', (event) => {
       event.preventDefault()
+
+      movementState.path = null
 
       clearSelection()
       clearUnitSelection()
