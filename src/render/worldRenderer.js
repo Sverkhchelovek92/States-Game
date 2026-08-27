@@ -16,6 +16,7 @@ export function renderWorld(ctx) {
   drawResources(ctx)
 
   drawAvailableMoves(ctx)
+  drawPath(ctx)
 
   drawHover(ctx)
   drawSelection(ctx)
@@ -166,6 +167,8 @@ function drawAvailableMoves(ctx) {
 
   ctx.restore()
 }
+
+function drawPath(ctx) {}
 
 function drawHover(ctx) {
   if (!hover.tile) {

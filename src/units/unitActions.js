@@ -4,6 +4,7 @@ import { getUnitAt } from './unitUtils.js'
 import { getMovementCost } from '../world/movement.js'
 import { world } from '../world.js'
 import { findPath } from './pathfinding.js'
+import { movementState } from './unitMovement.js'
 
 export function moveSelectedUnit() {
   const unit = unitSelection.unit
@@ -22,6 +23,7 @@ export function moveSelectedUnit() {
 
   const path = findPath(unit, hover.tileX, hover.tileY)
 
+  movementState.path = path
   console.log('PATH:', path)
 
   if (!isAdjacent(unit, hover.tileX, hover.tileY)) {

@@ -3,6 +3,10 @@ import { getMovementCost } from '../world/movement.js'
 import { getUnitAt } from './unitUtils.js'
 import { getNeighbors } from '../world/neighbors.js'
 
+export const movementState = {
+  path: null,
+}
+
 export function getAvailableMoves(unit) {
   const moves = []
 
