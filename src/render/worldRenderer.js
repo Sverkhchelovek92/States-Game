@@ -7,6 +7,7 @@ import { UNIT_TYPES } from '../units/unitTypes.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 import { RESOURCE_TYPES } from '../world/resourceTypes.js'
 import { getAvailableMoves } from '../units/unitMovement.js'
+import { movementState } from '../units/unitMovement.js'
 
 export function renderWorld(ctx) {
   drawTiles(ctx)
@@ -168,7 +169,32 @@ function drawAvailableMoves(ctx) {
   ctx.restore()
 }
 
-function drawPath(ctx) {}
+function drawPath(ctx) {
+  if (!movementState.path) {
+    return
+  }
+
+  const mapPixelWidth = world.getPixelWidth()
+
+  ctx.save()
+
+  ctx.fillStyle = 'rgba(255, 255, 0, 0.35)'
+
+  for (const tile of movementState.path) {
+    const worldX = tile.x * world.tileSize
+    const worldY = tile.y * world.tileSize
+
+    for (const offset of [-1, 0, 1]) {
+      const screenX = worldX + offset * mapPixelWidth - camera.x
+
+      const screenY = worldY - camera.y
+
+      ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
+    }
+  }
+
+  ctx.restore()
+}
 
 function drawHover(ctx) {
   if (!hover.tile) {
