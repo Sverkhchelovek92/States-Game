@@ -37,3 +37,23 @@ export function getAvailableMoves(unit) {
 
   return moves
 }
+
+export function moveAlongPath(unit, path) {
+  if (!path || path.length === 0) {
+    return
+  }
+
+  for (const tile of path) {
+    const targetTile = world.tiles[tile.y][tile.x]
+    const movementCost = getMovementCost(targetTile)
+
+    if (unit.movement < movementCost) {
+      break
+    }
+
+    unit.x = tile.x
+    unit.y = tile.y
+
+    unit.movement -= movementCost
+  }
+}
