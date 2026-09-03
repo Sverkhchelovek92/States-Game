@@ -5,6 +5,7 @@ import { getMovementCost } from '../world/movement.js'
 import { world } from '../world.js'
 import { findPath } from './pathfinding.js'
 import { movementState } from './unitMovement.js'
+import { moveAlongPath } from './unitMovement.js'
 
 export function moveSelectedUnit() {
   const unit = unitSelection.unit
