@@ -17,37 +17,25 @@ export function moveSelectedUnit() {
     return
   }
 
+  if (!hover.tile) {
+    return
+  }
+
   if (unit.x === hover.tileX && unit.y === hover.tileY) {
     return
   }
 
   const path = findPath(unit, hover.tileX, hover.tileY)
 
+  if (!path) {
+    return
+  }
+
   movementState.path = path
+
   console.log('PATH:', path)
 
-  if (!isAdjacent(unit, hover.tileX, hover.tileY)) {
-    return
-  }
-
-  const unitOnTarget = getUnitAt(hover.tileX, hover.tileY)
-
-  if (unitOnTarget) {
-    return
-  }
-
-  const targetTile = world.tiles[hover.tileY][hover.tileX]
-
-  const movementCost = getMovementCost(targetTile)
-
-  if (unit.movement < movementCost) {
-    return
-  }
-
-  unit.x = hover.tileX
-  unit.y = hover.tileY
-
-  unit.movement -= movementCost
+  moveAlongPath(unit, path)
 }
 
 function isAdjacent(unit, targetX, targetY) {
