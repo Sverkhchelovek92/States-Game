@@ -190,6 +190,47 @@ export const world = {
     this.smoothMoistureMap()
   },
 
+  smoothMoistureMap() {
+    const newMoistureMap = []
+
+    for (let y = 0; y < this.height; y++) {
+      const row = []
+
+      for (let x = 0; x < this.width; x++) {
+        let total = 0
+        let count = 0
+
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            let nx = x + dx
+            let ny = y + dy
+
+            if (nx < 0) {
+              nx = this.width - 1
+            }
+
+            if (nx >= this.width) {
+              nx = 0
+            }
+
+            if (ny < 0 || ny >= this.height) {
+              continue
+            }
+
+            total += this.moistureMap[ny][nx]
+            count++
+          }
+        }
+
+        row.push(total / count)
+      }
+
+      newMoistureMap.push(row)
+    }
+
+    this.moistureMap = newMoistureMap
+  },
+
   countLandNeighbors(x, y) {
     let count = 0
 
