@@ -320,6 +320,8 @@ export const world = {
 
     this.smoothLandMap()
 
+    this.generateMoistureMap()
+
     this.generateTerrain()
 
     this.generateResources()
