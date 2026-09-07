@@ -20,6 +20,8 @@ export const world = {
 
   landMap: [],
 
+  moistureMap: [],
+
   units: [],
 
   getPixelWidth() {
@@ -170,6 +172,22 @@ export const world = {
     }
 
     this.landMap = newLandMap
+  },
+
+  generateMoistureMap() {
+    this.moistureMap = []
+
+    for (let y = 0; y < this.height; y++) {
+      const row = []
+
+      for (let x = 0; x < this.width; x++) {
+        row.push(Math.random())
+      }
+
+      this.moistureMap.push(row)
+    }
+
+    this.smoothMoistureMap()
   },
 
   countLandNeighbors(x, y) {
