@@ -22,6 +22,11 @@ export function createUnit(type, x, y, owner) {
     movement: unitType.movement,
     maxMovement: unitType.movement,
 
+    vision: unitType.vision,
+
+    attack: unitType.attack,
+    defense: unitType.defense,
+
     health: unitType.maxHealth,
     maxHealth: unitType.maxHealth,
   }
