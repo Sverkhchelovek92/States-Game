@@ -61,7 +61,7 @@ export const world = {
 
     const isLand = this.landMap[y][x]
 
-    const random = Math.random()
+    const moisture = this.moistureMap[y][x]
 
     if (!isLand) {
       return 'water'
@@ -72,26 +72,26 @@ export const world = {
         return 'snow'
 
       case 'subpolar':
-        if (random < 0.7) {
-          return 'tundra'
+        if (moisture > 0.6) {
+          return 'forest'
         }
 
-        return 'forest'
+        return 'tundra'
 
       case 'temperate':
-        if (random < 0.3) {
+        if (moisture > 0.6) {
           return 'forest'
         }
 
         return 'grass'
 
       case 'tropical':
-        if (random < 0.35) {
-          return 'forest'
+        if (moisture < 0.25) {
+          return 'desert'
         }
 
-        if (random > 0.9) {
-          return 'desert'
+        if (moisture > 0.6) {
+          return 'forest'
         }
 
         return 'grass'
