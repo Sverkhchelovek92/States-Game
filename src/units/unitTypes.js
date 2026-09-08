@@ -9,6 +9,8 @@ export const UNIT_TYPES = {
 
     attack: 0,
     defense: 1,
+
+    maxHealth: 20,
   },
 
   warrior: {
@@ -21,5 +23,7 @@ export const UNIT_TYPES = {
 
     attack: 1,
     defense: 1,
+
+    maxHealth: 100,
   },
 }

@@ -21,5 +21,8 @@ export function createUnit(type, x, y, owner) {
 
     movement: unitType.movement,
     maxMovement: unitType.movement,
+
+    health: unitType.maxHealth,
+    maxHealth: unitType.maxHealth,
   }
 }
