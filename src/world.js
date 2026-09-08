@@ -279,6 +279,17 @@ export const world = {
     this.units.push(
       createUnit('warrior', (start.x + 2) % this.width, start.y, 1),
     )
+
+    this.createTestEnemyUnits(start)
+  },
+
+  createTestEnemyUnits(start) {
+    const enemyX1 = (start.x + 6) % this.width
+    const enemyX2 = (start.x + 7) % this.width
+
+    this.units.push(createUnit('warrior', enemyX1, start.y, 2))
+
+    this.units.push(createUnit('warrior', enemyX2, start.y, 2))
   },
 
   generateResources() {
