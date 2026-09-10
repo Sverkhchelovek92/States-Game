@@ -5,6 +5,8 @@ import { CLIMATE_TYPES } from './world/climateTypes.js'
 import { generateStartingPosition } from './world/startingPositions.js'
 import { RESOURCE_TYPES } from './world/resourceTypes.js'
 import { WORLD_SETTINGS } from './world/worldSettings.js'
+import { getMovementCost } from './world/movement.js'
+import { getUnitAt } from './units/unitUtils.js'
 
 const currentMapSize = MAP_SIZES.small
 
@@ -280,16 +282,30 @@ export const world = {
       createUnit('warrior', (start.x + 2) % this.width, start.y, 1),
     )
 
-    this.createTestEnemyUnits(start)
+    this.createTestEnemyUnits()
   },
 
-  createTestEnemyUnits(start) {
-    const enemyX1 = (start.x + 6) % this.width
-    const enemyX2 = (start.x + 7) % this.width
+  createTestEnemyUnits() {
+    let created = 0
 
-    this.units.push(createUnit('warrior', enemyX1, start.y, 2))
+    while (created < 2) {
+      const x = Math.floor(Math.random() * this.width)
+      const y = Math.floor(Math.random() * this.height)
 
-    this.units.push(createUnit('warrior', enemyX2, start.y, 2))
+      const tile = this.tiles[y][x]
+
+      if (!Number.isFinite(getMovementCost(tile))) {
+        continue
+      }
+
+      if (getUnitAt(x, y)) {
+        continue
+      }
+
+      this.units.push(createUnit('warrior', x, y, 2))
+
+      created++
+    }
   },
 
   generateResources() {
