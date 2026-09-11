@@ -1,6 +1,11 @@
 import { world } from '../world.js'
 
 export function attackUnit(attacker, target) {
+  if (attacker.movement <= 0) {
+    console.log('No movement points for attack')
+    return
+  }
+
   const distanceX = getWrappedDistanceX(attacker.x, target.x, world.width)
 
   const distanceY = Math.abs(attacker.y - target.y)
@@ -13,6 +18,8 @@ export function attackUnit(attacker, target) {
   }
 
   target.health -= attacker.attack
+
+  attacker.movement = 0
 
   console.log(
     `${attacker.type} attacked ${target.type}.`,
