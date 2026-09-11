@@ -12,6 +12,7 @@ import { clearSelection } from './input/selection.js'
 import { clearUnitSelection } from './units/unitSelection.js'
 import { endTurn } from './game/turnSystem.js'
 import { movementState } from './units/unitMovement.js'
+import { attackUnit } from './units/unitCombat.js'
 
 const PLAYER_ID = 1
 
@@ -51,15 +52,21 @@ export const engine = {
 
       // Click on unit
       if (unitUnderCursor) {
-        if (unitUnderCursor.owner === PLAYER_ID) {
-          selectUnitUnderCursor()
-        } else {
-          console.log('Enemy unit clicked')
+        // Enemy unit
+        if (unitUnderCursor.owner !== PLAYER_ID) {
+          if (unitSelection.unit) {
+            attackUnit(unitSelection.unit, unitUnderCursor)
+          }
+
+          return
         }
 
+        // Own unit
+        selectUnitUnderCursor()
         return
       }
-      // If unit is already clicked
+
+      // If unit is already selected
       if (unitSelection.unit) {
         moveSelectedUnit()
         return
