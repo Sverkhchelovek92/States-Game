@@ -25,6 +25,14 @@ export function attackUnit(attacker, target) {
     `${attacker.type} attacked ${target.type}.`,
     `Target health: ${target.health}`,
   )
+
+  if (target.health <= 0) {
+    const index = world.units.indexOf(target)
+
+    if (index !== -1) {
+      world.units.splice(index, 1)
+    }
+  }
 }
 
 function getWrappedDistanceX(x1, x2, worldWidth) {
