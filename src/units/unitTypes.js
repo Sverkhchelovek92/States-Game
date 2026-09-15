@@ -9,6 +9,7 @@ export const UNIT_TYPES = {
 
     attack: 0,
     defense: 1,
+    attackRange: 0,
 
     maxHealth: 20,
   },
@@ -23,6 +24,7 @@ export const UNIT_TYPES = {
 
     attack: 20,
     defense: 10,
+    attackRange: 1,
 
     maxHealth: 100,
   },
@@ -37,6 +39,7 @@ export const UNIT_TYPES = {
 
     attack: 15,
     defense: 5,
+    attackRange: 2,
 
     maxHealth: 80,
   },
@@ -51,6 +54,7 @@ export const UNIT_TYPES = {
 
     attack: 10,
     defense: 5,
+    attackRange: 1,
 
     maxHealth: 80,
   },
