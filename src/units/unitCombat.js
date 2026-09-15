@@ -17,6 +17,10 @@ export function attackUnit(attacker, target) {
     return
   }
 
+  const damageToTarget = Math.max(1, attacker.attack - target.defense / 2)
+
+  const damageToAttacker = Math.max(1, target.attack / 4)
+
   target.health -= attacker.attack
 
   attacker.movement = 0
