@@ -26,6 +26,7 @@ export function createUnit(type, x, y, owner) {
 
     attack: unitType.attack,
     defense: unitType.defense,
+    attackRange: unitType.attackRange,
 
     health: unitType.maxHealth,
     maxHealth: unitType.maxHealth,
