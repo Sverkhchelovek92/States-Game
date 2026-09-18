@@ -97,7 +97,27 @@ export function renderDebug(ctx) {
 
     y += 25
 
+    ctx.fillText(`HP: ${unit.health}/${unit.maxHealth}`, 10, y)
+
+    y += 25
+
     ctx.fillText(`Movement: ${unit.movement}/${unit.maxMovement}`, 10, y)
+
+    y += 25
+
+    ctx.fillText(`Attack: ${unit.attack}`, 10, y)
+
+    y += 25
+
+    ctx.fillText(`Defense: ${unit.defense}`, 10, y)
+
+    y += 25
+
+    ctx.fillText(`Attack Range: ${unit.attackRange}`, 10, y)
+
+    y += 25
+
+    ctx.fillText(`Vision: ${unit.vision}`, 10, y)
 
     y += 35
   }
