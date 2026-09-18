@@ -34,7 +34,11 @@ export function attackUnit(attacker, target) {
   )
 
   // Counterattack
-  if (target.health > 0 && target.attack > 0) {
+  if (
+    target.health > 0 &&
+    target.attack > 0 &&
+    distance <= target.attackRange
+  ) {
     const damageToAttacker = Math.max(1, target.attack / 4)
 
     attacker.health -= damageToAttacker

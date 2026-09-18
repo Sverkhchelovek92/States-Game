@@ -279,7 +279,7 @@ export const world = {
     )
 
     this.units.push(
-      createUnit('warrior', (start.x + 2) % this.width, start.y, 1),
+      createUnit('archer', (start.x + 2) % this.width, start.y, 1),
     )
 
     this.createTestEnemyUnits()
