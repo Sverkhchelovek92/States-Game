@@ -8,6 +8,7 @@ import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 import { RESOURCE_TYPES } from '../world/resourceTypes.js'
 import { getAvailableMoves } from '../units/unitMovement.js'
 import { movementState } from '../units/unitMovement.js'
+import { isTileVisible } from '../world/visibility.js'
 
 export function renderWorld(ctx) {
   drawTiles(ctx)
@@ -24,6 +25,7 @@ export function renderWorld(ctx) {
 
   drawUnits(ctx)
   drawSelectedUnit(ctx)
+  drawFogOfWar(ctx)
 }
 
 function drawTiles(ctx) {
@@ -289,4 +291,33 @@ function drawSelectedUnit(ctx) {
       world.tileSize - 8,
     )
   }
+}
+
+function drawFogOfWar(ctx) {
+  const mapPixelWidth = world.getPixelWidth()
+
+  ctx.save()
+
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.75)'
+
+  for (let y = 0; y < world.height; y++) {
+    for (let x = 0; x < world.width; x++) {
+      if (isTileVisible(x, y)) {
+        continue
+      }
+
+      const worldX = x * world.tileSize
+      const worldY = y * world.tileSize
+
+      for (const offset of [-1, 0, 1]) {
+        const screenX = worldX + offset * mapPixelWidth - camera.x
+
+        const screenY = worldY - camera.y
+
+        ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
+      }
+    }
+  }
+
+  ctx.restore()
 }
