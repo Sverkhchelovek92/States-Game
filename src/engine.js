@@ -13,6 +13,7 @@ import { clearUnitSelection } from './units/unitSelection.js'
 import { endTurn } from './game/turnSystem.js'
 import { movementState } from './units/unitMovement.js'
 import { attackUnit } from './units/unitCombat.js'
+import { foundCity } from './cities/cityActions.js'
 
 const PLAYER_ID = 1
 
@@ -88,6 +89,9 @@ export const engine = {
     window.addEventListener('keydown', (event) => {
       if (event.code === 'Space') {
         endTurn()
+      }
+      if (event.code === 'KeyB') {
+        foundCity()
       }
     })
 
