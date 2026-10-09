@@ -26,6 +26,8 @@ export const world = {
 
   units: [],
 
+  cities: [],
+
   getPixelWidth() {
     return this.width * world.tileSize
   },
