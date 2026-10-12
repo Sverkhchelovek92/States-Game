@@ -24,6 +24,7 @@ export function renderWorld(ctx) {
   drawSelection(ctx)
 
   drawUnits(ctx)
+  drawCities(ctx)
   drawSelectedUnit(ctx)
   drawFogOfWar(ctx)
 }
@@ -260,6 +261,39 @@ function drawUnits(ctx) {
         screenY + 8,
         world.tileSize - 16,
         world.tileSize - 16,
+      )
+    }
+  }
+}
+
+function drawCities(ctx) {
+  const mapPixelWidth = world.getPixelWidth()
+
+  for (const city of world.cities) {
+    const worldX = city.x * world.tileSize
+    const worldY = city.y * world.tileSize
+
+    for (const offset of [-1, 0, 1]) {
+      const screenX = worldX + offset * mapPixelWidth - camera.x
+
+      const screenY = worldY - camera.y
+
+      ctx.fillStyle = '#d4a017'
+      ctx.fillRect(
+        screenX + 6,
+        screenY + 6,
+        world.tileSize - 12,
+        world.tileSize - 12,
+      )
+
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth = 2
+
+      ctx.strokeRect(
+        screenX + 6,
+        screenY + 6,
+        world.tileSize - 12,
+        world.tileSize - 12,
       )
     }
   }
