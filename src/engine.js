@@ -14,6 +14,11 @@ import { endTurn } from './game/turnSystem.js'
 import { movementState } from './units/unitMovement.js'
 import { attackUnit } from './units/unitCombat.js'
 import { foundCity } from './cities/cityActions.js'
+import {
+  citySelection,
+  selectCityUnderCursor,
+  clearCitySelection,
+} from './cities/citySelection.js'
 
 const PLAYER_ID = 1
 
@@ -63,7 +68,19 @@ export const engine = {
         }
 
         // Own unit
+        clearCitySelection()
         selectUnitUnderCursor()
+        return
+      }
+
+      const cityUnderCursor = world.cities.find(
+        (city) => city.x === hover.tileX && city.y === hover.tileY,
+      )
+
+      if (cityUnderCursor) {
+        clearUnitSelection()
+        clearSelection()
+        selectCityUnderCursor()
         return
       }
 
@@ -74,6 +91,7 @@ export const engine = {
       }
 
       // Otherwise choose tile
+      clearCitySelection()
       selectHoveredTile()
     })
 
@@ -84,6 +102,7 @@ export const engine = {
 
       clearSelection()
       clearUnitSelection()
+      clearCitySelection()
     })
 
     window.addEventListener('keydown', (event) => {
