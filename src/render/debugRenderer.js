@@ -7,6 +7,7 @@ import { UNIT_TYPES } from '../units/unitTypes.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 import { ELEVATION_TYPES } from '../world/elevationTypes.js'
 import { world } from '../world.js'
+import { citySelection } from '../cities/citySelection.js'
 
 export function renderDebug(ctx) {
   ctx.textAlign = 'left'
@@ -121,6 +122,34 @@ export function renderDebug(ctx) {
 
     y += 35
   }
+
+  // CITY
+
+  ctx.fillText('CITY', 10, y)
+  y += 25
+
+  if (citySelection.city) {
+    const city = citySelection.city
+
+    ctx.fillText(`ID: ${city.id}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Name: ${city.name}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Position: ${city.x}, ${city.y}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Owner: ${city.owner}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Population: ${city.population}`, 10, y)
+    y += 25
+
+    ctx.fillText(`HP: ${city.health}/${city.maxHealth}`, 10, y)
+    y += 35
+  }
+
   // CAMERA
 
   ctx.fillText('CAMERA', 10, y)
