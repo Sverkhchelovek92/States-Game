@@ -19,6 +19,7 @@ import {
   selectCityUnderCursor,
   clearCitySelection,
 } from './cities/citySelection.js'
+import { showCityPanel, hideCityPanel } from './cities/cityPanel.js'
 
 const PLAYER_ID = 1
 
@@ -69,6 +70,7 @@ export const engine = {
 
         // Own unit
         clearCitySelection()
+        hideCityPanel()
         selectUnitUnderCursor()
         return
       }
@@ -81,6 +83,7 @@ export const engine = {
         clearUnitSelection()
         clearSelection()
         selectCityUnderCursor()
+        showCityPanel()
         return
       }
 
@@ -92,6 +95,7 @@ export const engine = {
 
       // Otherwise choose tile
       clearCitySelection()
+      hideCityPanel()
       selectHoveredTile()
     })
 
@@ -103,6 +107,7 @@ export const engine = {
       clearSelection()
       clearUnitSelection()
       clearCitySelection()
+      hideCityPanel()
     })
 
     window.addEventListener('keydown', (event) => {
@@ -111,6 +116,9 @@ export const engine = {
       }
       if (event.code === 'KeyB') {
         foundCity()
+      }
+      if (event.code === 'Escape') {
+        hideCityPanel()
       }
     })
 
