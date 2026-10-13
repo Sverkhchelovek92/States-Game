@@ -1,4 +1,4 @@
-const CITY_NAMES = [
+export const CITY_NAMES = [
   'Moscow',
   'Novgorod',
   'Kiev',

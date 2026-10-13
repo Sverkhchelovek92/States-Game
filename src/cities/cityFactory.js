@@ -1,10 +1,16 @@
+import { CITY_NAMES } from './cityNames.js'
+
 let nextCityId = 1
 
 export function createCity(x, y, owner) {
-  return {
-    id: nextCityId++,
+  const cityId = nextCityId++
 
-    name: `City ${nextCityId - 1}`,
+  const name = CITY_NAMES[cityId - 1] || `City ${cityId}`
+
+  return {
+    id: cityId,
+
+    name,
 
     x,
     y,
