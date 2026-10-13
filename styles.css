@@ -15,3 +15,53 @@ body {
 canvas {
   display: block;
 }
+
+.city-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  width: 260px;
+
+  background: #111;
+  border: 2px solid #fff;
+
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+
+  z-index: 1000;
+}
+
+.city-panel.hidden {
+  display: none;
+}
+
+.city-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+
+  border-bottom: 1px solid #fff;
+  font-weight: bold;
+}
+
+.city-panel-header button {
+  background: none;
+  border: none;
+
+  color: #fff;
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+.city-panel-content {
+  padding: 10px;
+}
+
+.city-panel-content div {
+  margin-bottom: 8px;
+}
