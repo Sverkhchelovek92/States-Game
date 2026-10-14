@@ -134,6 +134,8 @@ export const world = {
           terrain,
           elevation,
 
+          owner: null,
+
           resource: null,
         })
       }
