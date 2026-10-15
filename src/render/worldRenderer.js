@@ -9,6 +9,7 @@ import { RESOURCE_TYPES } from '../world/resourceTypes.js'
 import { getAvailableMoves } from '../units/unitMovement.js'
 import { movementState } from '../units/unitMovement.js'
 import { isTileVisible } from '../world/visibility.js'
+import { getCityTerritory } from '../cities/cityTerritory.js'
 
 export function renderWorld(ctx) {
   drawTiles(ctx)
@@ -25,6 +26,7 @@ export function renderWorld(ctx) {
 
   drawUnits(ctx)
   drawCities(ctx)
+  drawCityTerritories(ctx)
   drawSelectedUnit(ctx)
   drawFogOfWar(ctx)
 }
@@ -354,4 +356,83 @@ function drawFogOfWar(ctx) {
   }
 
   ctx.restore()
+}
+
+function drawCityTerritories(ctx) {
+  ctx.save()
+
+  ctx.strokeStyle = '#ffffff'
+  ctx.lineWidth = 2
+
+  for (const city of world.cities) {
+    for (let y = 0; y < world.height; y++) {
+      for (let x = 0; x < world.width; x++) {
+        const tile = world.tiles[y][x]
+
+        if (tile.owner !== city.id) {
+          continue
+        }
+
+        drawTerritoryBorder(ctx, x, y, city.id)
+      }
+    }
+  }
+
+  ctx.restore()
+}
+
+function drawTerritoryBorder(ctx, x, y, cityId) {
+  const tileSize = world.tileSize
+  const mapPixelWidth = world.getPixelWidth()
+
+  const worldX = x * tileSize
+  const worldY = y * tileSize
+
+  for (const offset of [-1, 0, 1]) {
+    const screenX = worldX + offset * mapPixelWidth - camera.x
+
+    const screenY = worldY - camera.y
+
+    // Top
+    if (!isSameCityTile(x, y - 1, cityId)) {
+      ctx.beginPath()
+      ctx.moveTo(screenX, screenY)
+      ctx.lineTo(screenX + tileSize, screenY)
+      ctx.stroke()
+    }
+
+    // Bottom
+    if (!isSameCityTile(x, y + 1, cityId)) {
+      ctx.beginPath()
+      ctx.moveTo(screenX, screenY + tileSize)
+      ctx.lineTo(screenX + tileSize, screenY + tileSize)
+      ctx.stroke()
+    }
+
+    // Left
+    if (!isSameCityTile(x - 1, y, cityId)) {
+      ctx.beginPath()
+      ctx.moveTo(screenX, screenY)
+      ctx.lineTo(screenX, screenY + tileSize)
+      ctx.stroke()
+    }
+
+    // Right
+    if (!isSameCityTile(x + 1, y, cityId)) {
+      ctx.beginPath()
+      ctx.moveTo(screenX + tileSize, screenY)
+      ctx.lineTo(screenX + tileSize, screenY + tileSize)
+      ctx.stroke()
+    }
+  }
+}
+
+function isSameCityTile(x, y, cityId) {
+  if (y < 0 || y >= world.height) {
+    return false
+  }
+
+  const wrappedX = ((x % world.width) + world.width) % world.width
+
+  return world.tiles[y][wrappedX].owner === cityId
 }
