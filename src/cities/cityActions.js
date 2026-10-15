@@ -1,6 +1,7 @@
 import { world } from '../world.js'
 import { createCity } from './cityFactory.js'
 import { unitSelection, clearUnitSelection } from '../units/unitSelection.js'
+import { claimCityTile } from './cityTerritory.js'
 
 export function foundCity() {
   const unit = unitSelection.unit
@@ -28,6 +29,12 @@ export function foundCity() {
   const city = createCity(unit.x, unit.y, unit.owner)
 
   world.cities.push(city)
+
+  for (let offsetY = -1; offsetY <= 1; offsetY++) {
+    for (let offsetX = -1; offsetX <= 1; offsetX++) {
+      claimCityTile(city, city.x + offsetX, city.y + offsetY)
+    }
+  }
 
   const unitIndex = world.units.indexOf(unit)
 
