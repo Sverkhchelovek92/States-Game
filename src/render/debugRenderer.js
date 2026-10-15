@@ -8,6 +8,7 @@ import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 import { ELEVATION_TYPES } from '../world/elevationTypes.js'
 import { world } from '../world.js'
 import { citySelection } from '../cities/citySelection.js'
+import { getCityTerritorySize } from '../cities/cityTerritory.js'
 
 export function renderDebug(ctx) {
   ctx.textAlign = 'left'
@@ -144,6 +145,9 @@ export function renderDebug(ctx) {
     y += 25
 
     ctx.fillText(`Population: ${city.population}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Territory: ${getCityTerritorySize(city)}`, 10, y)
     y += 25
 
     ctx.fillText(`HP: ${city.health}/${city.maxHealth}`, 10, y)
