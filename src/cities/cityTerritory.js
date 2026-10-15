@@ -17,3 +17,11 @@ export function claimCityTile(city, x, y) {
 
   return true
 }
+
+export function getCityTerritory(city) {
+  return world.tiles.flat().filter((tile) => tile.owner === city.id)
+}
+
+export function getCityTerritorySize(city) {
+  return getCityTerritory(city).length
+}
