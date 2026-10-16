@@ -19,6 +19,9 @@ export function createCity(x, y, owner) {
 
     population: 1,
 
+    food: 0,
+    foodToGrow: 10,
+
     health: 100,
     maxHealth: 100,
   }

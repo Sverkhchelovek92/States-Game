@@ -147,6 +147,9 @@ export function renderDebug(ctx) {
     ctx.fillText(`Population: ${city.population}`, 10, y)
     y += 25
 
+    ctx.fillText(`Food: ${city.food}/${city.foodToGrow}`, 10, y)
+    y += 25
+
     ctx.fillText(`Territory: ${getCityTerritorySize(city)}`, 10, y)
     y += 25
 
