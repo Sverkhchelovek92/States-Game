@@ -7,6 +7,8 @@ export const TERRAIN_TYPES = {
     movementCost: 1,
 
     passable: true,
+
+    food: 2,
   },
 
   forest: {
@@ -17,6 +19,8 @@ export const TERRAIN_TYPES = {
     movementCost: 2,
 
     passable: true,
+
+    food: 1,
   },
 
   water: {
@@ -27,6 +31,8 @@ export const TERRAIN_TYPES = {
     movementCost: 999,
 
     passable: false,
+
+    food: 1,
   },
 
   snow: {
@@ -37,6 +43,8 @@ export const TERRAIN_TYPES = {
     movementCost: 1,
 
     passable: true,
+
+    food: 0,
   },
 
   tundra: {
@@ -45,6 +53,8 @@ export const TERRAIN_TYPES = {
     movementCost: 1,
 
     passable: true,
+
+    food: 1,
   },
 
   desert: {
@@ -53,5 +63,7 @@ export const TERRAIN_TYPES = {
     movementCost: 1,
 
     passable: true,
+
+    food: 0,
   },
 }
