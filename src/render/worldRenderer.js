@@ -10,6 +10,7 @@ import { getAvailableMoves } from '../units/unitMovement.js'
 import { movementState } from '../units/unitMovement.js'
 import { isTileVisible } from '../world/visibility.js'
 import { getCityTerritory } from '../cities/cityTerritory.js'
+import { getCityWorkedTiles } from '../cities/cityGrowth.js'
 
 export function renderWorld(ctx) {
   drawTiles(ctx)
@@ -27,6 +28,8 @@ export function renderWorld(ctx) {
   drawUnits(ctx)
   drawCities(ctx)
   drawCityTerritories(ctx)
+  drawWorkedTiles(ctx)
+
   drawSelectedUnit(ctx)
   drawFogOfWar(ctx)
 }
@@ -379,6 +382,35 @@ function drawCityTerritories(ctx) {
   }
 
   ctx.restore()
+}
+
+function drawWorkedTiles(ctx) {
+  const mapPixelWidth = world.getPixelWidth()
+
+  for (const city of world.cities) {
+    const workedTiles = getCityWorkedTiles(city)
+
+    for (const tile of workedTiles) {
+      const worldX = tile.x * world.tileSize
+      const worldY = tile.y * world.tileSize
+
+      for (const offset of [-1, 0, 1]) {
+        const screenX = worldX + offset * mapPixelWidth - camera.x
+
+        const screenY = worldY - camera.y
+
+        ctx.strokeStyle = '#ffd700'
+        ctx.lineWidth = 3
+
+        ctx.strokeRect(
+          screenX + 2,
+          screenY + 2,
+          world.tileSize - 4,
+          world.tileSize - 4,
+        )
+      }
+    }
+  }
 }
 
 function drawTerritoryBorder(ctx, x, y, cityId) {
