@@ -1,6 +1,35 @@
 import { world } from '../world.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 
+export function getCityWorkedTiles(city) {
+  const territory = []
+
+  for (let y = 0; y < world.height; y++) {
+    for (let x = 0; x < world.width; x++) {
+      const tile = world.tiles[y][x]
+
+      if (tile.owner !== city.id) continue
+
+      territory.push(tile)
+    }
+  }
+
+  const centerTile = world.tiles[city.y][city.x]
+
+  const otherTiles = territory
+    .filter((tile) => tile !== centerTile)
+    .sort((a, b) => {
+      const foodA = TERRAIN_TYPES[a.terrain]?.food ?? 0
+      const foodB = TERRAIN_TYPES[b.terrain]?.food ?? 0
+
+      return foodB - foodA
+    })
+
+  const maxWorkedTiles = city.population + 1
+
+  return [centerTile, ...otherTiles.slice(0, maxWorkedTiles - 1)]
+}
+
 export function getCityFood(city) {
   let food = 0
 
