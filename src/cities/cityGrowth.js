@@ -31,24 +31,16 @@ export function getCityWorkedTiles(city) {
 }
 
 export function getCityFood(city) {
+  const workedTiles = getCityWorkedTiles(city)
+
   let food = 0
 
-  for (let y = 0; y < world.height; y++) {
-    for (let x = 0; x < world.width; x++) {
-      const tile = world.tiles[y][x]
+  for (const tile of workedTiles) {
+    const terrain = TERRAIN_TYPES[tile.terrain]
 
-      if (tile.owner !== city.id) {
-        continue
-      }
+    if (!terrain) continue
 
-      const terrain = TERRAIN_TYPES[tile.terrain]
-
-      if (!terrain) {
-        continue
-      }
-
-      food += terrain.food
-    }
+    food += terrain.food
   }
 
   return food
