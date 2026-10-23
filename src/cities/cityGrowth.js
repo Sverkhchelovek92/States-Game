@@ -46,6 +46,10 @@ export function getCityFood(city) {
   return food
 }
 
+export function getCityFoodConsumption(city) {
+  return city.population * 2
+}
+
 export function processCityGrowth(city) {
   const foodProduction = getCityFood(city)
 
