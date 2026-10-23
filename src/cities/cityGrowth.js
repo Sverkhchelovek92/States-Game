@@ -52,8 +52,15 @@ export function getCityFoodConsumption(city) {
 
 export function processCityGrowth(city) {
   const foodProduction = getCityFood(city)
+  const foodConsumption = getCityFoodConsumption(city)
 
-  city.food += foodProduction
+  const netFood = foodProduction - foodConsumption
+
+  city.food += netFood
+
+  if (city.food < 0) {
+    city.food = 0
+  }
 
   if (city.food < city.foodToGrow) {
     return
