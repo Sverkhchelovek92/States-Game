@@ -9,6 +9,8 @@ export const TERRAIN_TYPES = {
     passable: true,
 
     food: 2,
+
+    production: 0,
   },
 
   forest: {
@@ -21,6 +23,8 @@ export const TERRAIN_TYPES = {
     passable: true,
 
     food: 1,
+
+    production: 2,
   },
 
   water: {
@@ -33,6 +37,8 @@ export const TERRAIN_TYPES = {
     passable: false,
 
     food: 1,
+
+    production: 0,
   },
 
   snow: {
@@ -45,6 +51,8 @@ export const TERRAIN_TYPES = {
     passable: true,
 
     food: 0,
+
+    production: 0,
   },
 
   tundra: {
@@ -55,6 +63,8 @@ export const TERRAIN_TYPES = {
     passable: true,
 
     food: 1,
+
+    production: 1,
   },
 
   desert: {
@@ -65,5 +75,7 @@ export const TERRAIN_TYPES = {
     passable: true,
 
     food: 0,
+
+    production: 0,
   },
 }
