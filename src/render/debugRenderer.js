@@ -14,6 +14,7 @@ import {
   getCityFoodConsumption,
   getCityWorkedTiles,
 } from '../cities/cityGrowth.js'
+import { getCityProduction } from '../cities/cityProduction.js'
 
 export function renderDebug(ctx) {
   ctx.textAlign = 'left'
@@ -165,6 +166,9 @@ export function renderDebug(ctx) {
     y += 25
 
     ctx.fillText(`Net Food: ${netFood >= 0 ? '+' : ''}${netFood}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Production: ${getCityProduction(city)}`, 10, y)
     y += 25
 
     ctx.fillText(`Worked Tiles: ${getCityWorkedTiles(city).length}`, 10, y)
