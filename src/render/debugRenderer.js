@@ -9,7 +9,11 @@ import { ELEVATION_TYPES } from '../world/elevationTypes.js'
 import { world } from '../world.js'
 import { citySelection } from '../cities/citySelection.js'
 import { getCityTerritorySize } from '../cities/cityTerritory.js'
-import { getCityFood, getCityWorkedTiles } from '../cities/cityGrowth.js'
+import {
+  getCityFood,
+  getCityFoodConsumption,
+  getCityWorkedTiles,
+} from '../cities/cityGrowth.js'
 
 export function renderDebug(ctx) {
   ctx.textAlign = 'left'
@@ -152,6 +156,15 @@ export function renderDebug(ctx) {
     y += 25
 
     ctx.fillText(`Food Production: ${getCityFood(city)}`, 10, y)
+    y += 25
+
+    const foodConsumption = getCityFoodConsumption(city)
+    const netFood = getCityFood(city) - foodConsumption
+
+    ctx.fillText(`Food Consumption: ${foodConsumption}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Net Food: ${netFood >= 0 ? '+' : ''}${netFood}`, 10, y)
     y += 25
 
     ctx.fillText(`Worked Tiles: ${getCityWorkedTiles(city).length}`, 10, y)
