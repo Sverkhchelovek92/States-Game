@@ -20,3 +20,9 @@ export function getCityProduction(city) {
 
   return production
 }
+
+export function processCityProduction(city) {
+  const production = getCityProduction(city)
+
+  city.production += production
+}
