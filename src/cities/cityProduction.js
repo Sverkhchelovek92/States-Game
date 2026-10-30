@@ -1,5 +1,6 @@
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 import { getCityWorkedTiles } from './cityGrowth.js'
+import { PRODUCTION_ITEMS } from './productionItems.js'
 
 export function getCityProduction(city) {
   const workedTiles = getCityWorkedTiles(city)
@@ -19,6 +20,22 @@ export function getCityProduction(city) {
   }
 
   return production
+}
+
+export function startCityProduction(city, itemType) {
+  const item = PRODUCTION_ITEMS[itemType]
+
+  if (!item) {
+    console.log(`Unknown production item: ${itemType}`)
+    return false
+  }
+
+  city.productionItem = itemType
+  city.productionProgress = 0
+
+  console.log(`${city.name} started production of ${item.name}`)
+
+  return true
 }
 
 export function processCityProduction(city) {
