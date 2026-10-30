@@ -44,5 +44,5 @@ export function processCityProduction(city) {
   }
   const production = getCityProduction(city)
 
-  city.production += production
+  city.productionProgress += production
 }

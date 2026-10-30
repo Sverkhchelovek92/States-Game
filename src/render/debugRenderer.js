@@ -171,7 +171,10 @@ export function renderDebug(ctx) {
     ctx.fillText(`Production: ${getCityProduction(city)}`, 10, y)
     y += 25
 
-    ctx.fillText(`Stored Production: ${city.production}`, 10, y)
+    ctx.fillText(`Production Progress: ${city.productionProgress}`, 10, y)
+    y += 25
+
+    ctx.fillText(`Production Item: ${city.productionItem || 'None'}`, 10, y)
     y += 25
 
     ctx.fillText(`Worked Tiles: ${getCityWorkedTiles(city).length}`, 10, y)

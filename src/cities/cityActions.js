@@ -2,6 +2,7 @@ import { world } from '../world.js'
 import { createCity } from './cityFactory.js'
 import { unitSelection, clearUnitSelection } from '../units/unitSelection.js'
 import { claimCityTile } from './cityTerritory.js'
+import { startCityProduction } from './cityProduction.js'
 
 export function foundCity() {
   const unit = unitSelection.unit
@@ -29,6 +30,7 @@ export function foundCity() {
   const city = createCity(unit.x, unit.y, unit.owner)
 
   world.cities.push(city)
+  startCityProduction(city, 'warrior')
 
   for (let offsetY = -1; offsetY <= 1; offsetY++) {
     for (let offsetX = -1; offsetX <= 1; offsetX++) {
