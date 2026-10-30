@@ -22,7 +22,8 @@ export function createCity(x, y, owner) {
     food: 0,
     foodToGrow: 10,
 
-    production: 0,
+    productionItem: null,
+    productionProgress: 0,
 
     health: 100,
     maxHealth: 100,
