@@ -1,6 +1,9 @@
+import { world } from '../world.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 import { getCityWorkedTiles } from './cityGrowth.js'
 import { PRODUCTION_ITEMS } from './productionItems.js'
+import { createUnit } from '../units/unitFactory.js'
+import { findCitySpawnTile } from './citySpawn.js'
 
 export function getCityProduction(city) {
   const workedTiles = getCityWorkedTiles(city)
@@ -42,6 +45,7 @@ export function processCityProduction(city) {
   if (!city.productionItem) {
     return
   }
+
   const item = PRODUCTION_ITEMS[city.productionItem]
 
   if (!item) {
@@ -53,9 +57,29 @@ export function processCityProduction(city) {
   city.productionProgress += production
 
   if (city.productionProgress >= item.cost) {
+    const spawnTile = findCitySpawnTile(city)
+
+    if (!spawnTile) {
+      console.log(`${city.name} has no space to spawn a unit`)
+      return
+    }
+
     const overflow = city.productionProgress - item.cost
 
     console.log(`${city.name} completed ${item.name}`)
+
+    if (item.type === 'unit') {
+      const unit = createUnit(
+        city.productionItem,
+        spawnTile.x,
+        spawnTile.y,
+        city.owner,
+      )
+
+      world.units.push(unit)
+
+      console.log(`${item.name} appeared near ${city.name}`)
+    }
 
     city.productionItem = null
     city.productionProgress = overflow
