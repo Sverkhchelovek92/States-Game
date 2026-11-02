@@ -42,7 +42,22 @@ export function processCityProduction(city) {
   if (!city.productionItem) {
     return
   }
+  const item = PRODUCTION_ITEMS[city.productionItem]
+
+  if (!item) {
+    return
+  }
+
   const production = getCityProduction(city)
 
   city.productionProgress += production
+
+  if (city.productionProgress >= item.cost) {
+    const overflow = city.productionProgress - item.cost
+
+    console.log(`${city.name} completed ${item.name}`)
+
+    city.productionItem = null
+    city.productionProgress = overflow
+  }
 }
