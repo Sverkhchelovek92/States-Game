@@ -30,7 +30,7 @@ export function foundCity() {
   const city = createCity(unit.x, unit.y, unit.owner)
 
   world.cities.push(city)
-  startCityProduction(city, 'warrior')
+  // startCityProduction(city, 'warrior')
 
   for (let offsetY = -1; offsetY <= 1; offsetY++) {
     for (let offsetX = -1; offsetX <= 1; offsetX++) {

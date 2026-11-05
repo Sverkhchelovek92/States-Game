@@ -55,6 +55,10 @@ export const engine = {
         return
       }
 
+      if (event.target.closest('#city-panel')) {
+        return
+      }
+
       const unitUnderCursor = getUnitAt(hover.tileX, hover.tileY)
 
       // Click on unit
@@ -112,6 +116,7 @@ export const engine = {
 
     window.addEventListener('keydown', (event) => {
       if (event.code === 'Space') {
+        event.preventDefault()
         endTurn()
       }
       if (event.code === 'KeyB') {
