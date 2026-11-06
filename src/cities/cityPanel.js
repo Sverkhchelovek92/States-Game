@@ -1,5 +1,6 @@
 import { citySelection } from './citySelection.js'
 import { startCityProduction } from './cityProduction.js'
+import { PRODUCTION_ITEMS } from './productionItems.js'
 
 const panel = document.getElementById('city-panel')
 const cityName = document.getElementById('city-name')
@@ -10,6 +11,7 @@ const closeButton = document.getElementById('city-close')
 const productionItem = document.getElementById('city-production-item')
 const warriorButton = document.getElementById('produce-warrior')
 const settlerButton = document.getElementById('produce-settler')
+const productionProgress = document.getElementById('city-production-progress')
 
 export function showCityPanel() {
   const city = citySelection.city
@@ -22,7 +24,13 @@ export function showCityPanel() {
   cityPopulation.textContent = city.population
   cityHealth.textContent = `${city.health} / ${city.maxHealth}`
   cityOwner.textContent = city.owner
-  productionItem.textContent = city.productionItem || 'None'
+  const item = PRODUCTION_ITEMS[city.productionItem]
+
+  productionItem.textContent = item?.name || 'None'
+
+  productionProgress.textContent = item
+    ? `${city.productionProgress} / ${item.cost}`
+    : '0 / 0'
 
   panel.classList.remove('hidden')
 }
