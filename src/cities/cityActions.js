@@ -44,6 +44,11 @@ export function foundCity() {
     return
   }
 
+  if (isCityTooClose(unit.x, unit.y)) {
+    console.log('Cannot found a city too close to another city')
+    return
+  }
+
   const city = createCity(unit.x, unit.y, unit.owner)
 
   world.cities.push(city)
