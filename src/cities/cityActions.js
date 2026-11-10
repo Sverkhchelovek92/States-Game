@@ -4,6 +4,23 @@ import { unitSelection, clearUnitSelection } from '../units/unitSelection.js'
 import { claimCityTile } from './cityTerritory.js'
 import { startCityProduction } from './cityProduction.js'
 
+function isCityTooClose(x, y) {
+  for (const city of world.cities) {
+    const dx = Math.abs(city.x - x)
+    const wrappedDx = Math.min(dx, world.width - dx)
+
+    const dy = Math.abs(city.y - y)
+
+    const distance = Math.max(wrappedDx, dy)
+
+    if (distance < 3) {
+      return true
+    }
+  }
+
+  return false
+}
+
 export function foundCity() {
   const unit = unitSelection.unit
 
