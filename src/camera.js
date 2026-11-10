@@ -5,6 +5,10 @@ export const camera = {
   speed: 12,
 
   edgeSize: 32,
+
+  mode: 'world',
+
+  cityZoom: 2,
 }
 
 export function clampCameraY(maxY) {
