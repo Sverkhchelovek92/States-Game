@@ -8,7 +8,7 @@ export const camera = {
 
   mode: 'world',
 
-  cityZoom: 2,
+  zoom: 1,
 }
 
 export function clampCameraY(maxY) {

@@ -62,6 +62,13 @@ function drawTiles(ctx) {
   }
 }
 
+function worldToScreen(worldX, worldY) {
+  return {
+    x: (worldX - camera.x) * camera.zoom,
+    y: (worldY - camera.y) * camera.zoom,
+  }
+}
+
 function drawElevation(ctx) {
   const mapPixelWidth = world.getPixelWidth()
 
