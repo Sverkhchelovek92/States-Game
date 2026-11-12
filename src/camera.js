@@ -4,6 +4,9 @@ export const camera = {
   x: 0,
   y: 0,
 
+  previousX: 0,
+  previousY: 0,
+
   speed: 12,
 
   edgeSize: 32,
@@ -24,6 +27,9 @@ export function clampCameraY(maxY) {
 }
 
 export function enterCityMode(city, screenWidth, screenHeight) {
+  camera.previousX = camera.x
+  camera.previousY = camera.y
+
   camera.mode = 'city'
   camera.zoom = 2
 
@@ -32,4 +38,12 @@ export function enterCityMode(city, screenWidth, screenHeight) {
 
   camera.x = cityPixelX - screenWidth / (2 * camera.zoom)
   camera.y = cityPixelY - screenHeight / (2 * camera.zoom)
+}
+
+export function exitCityMode() {
+  camera.mode = 'world'
+  camera.zoom = 1
+
+  camera.x = camera.previousX
+  camera.y = camera.previousY
 }

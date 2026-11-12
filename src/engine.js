@@ -1,5 +1,5 @@
 import { renderWorld } from './render/worldRenderer.js'
-import { camera } from './camera.js'
+import { camera, enterCityMode, exitCityMode } from './camera.js'
 import { world } from './world.js'
 import { updateHover } from './input/hover.js'
 import { renderDebug } from './render/debugRenderer.js'
@@ -88,6 +88,9 @@ export const engine = {
         clearSelection()
         selectCityUnderCursor()
         showCityPanel()
+
+        enterCityMode(cityUnderCursor, this.width, this.height)
+
         return
       }
 
@@ -124,6 +127,7 @@ export const engine = {
       }
       if (event.code === 'Escape') {
         hideCityPanel()
+        exitCityMode()
       }
     })
 
