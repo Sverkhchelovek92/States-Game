@@ -45,18 +45,22 @@ function drawTiles(ctx) {
       const worldY = y * world.tileSize
 
       for (const offset of [-1, 0, 1]) {
-        const screenX = worldX + offset * mapPixelWidth - camera.x
-        const screenY = worldY - camera.y
+        const screenX =
+          (worldX + offset * mapPixelWidth - camera.x) * camera.zoom
+
+        const screenY = (worldY - camera.y) * camera.zoom
+
+        const tileSize = world.tileSize * camera.zoom
 
         const terrain = TERRAIN_TYPES[tile.terrain]
 
         ctx.fillStyle = terrain.color
 
-        ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
+        ctx.fillRect(screenX, screenY, tileSize, tileSize)
 
         ctx.strokeStyle = '#111'
 
-        ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
+        ctx.strokeRect(screenX, screenY, tileSize, tileSize)
       }
     }
   }
