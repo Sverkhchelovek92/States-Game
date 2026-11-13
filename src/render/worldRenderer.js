@@ -343,7 +343,7 @@ function drawSelectedUnit(ctx) {
   const worldY = unit.y * world.tileSize
 
   ctx.strokeStyle = '#ffffff'
-  ctx.lineWidth = 3
+  ctx.lineWidth = 3 * camera.zoom
 
   for (const offset of [-1, 0, 1]) {
     const position = getScreenPosition(worldX + offset * mapPixelWidth, worldY)
