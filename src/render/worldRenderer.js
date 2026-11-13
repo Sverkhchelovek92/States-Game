@@ -132,7 +132,7 @@ function drawResources(ctx) {
 
   ctx.save()
 
-  ctx.font = '14px Arial'
+  ctx.font = `${14 * camera.zoom}px Arial`
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
 
@@ -152,13 +152,15 @@ function drawResources(ctx) {
       const worldY = y * world.tileSize
 
       for (const offset of [-1, 0, 1]) {
-        const screenX = worldX + offset * mapPixelWidth - camera.x
-        const screenY = worldY - camera.y
+        const position = getScreenPosition(
+          worldX + offset * mapPixelWidth,
+          worldY,
+        )
 
         ctx.fillText(
           resource.symbol,
-          screenX + world.tileSize / 2,
-          screenY + world.tileSize / 2,
+          position.x + (world.tileSize * camera.zoom) / 2,
+          position.y + (world.tileSize * camera.zoom) / 2,
         )
       }
     }
@@ -291,32 +293,34 @@ function drawUnits(ctx) {
 
 function drawCities(ctx) {
   const mapPixelWidth = world.getPixelWidth()
+  const tileSize = world.tileSize * camera.zoom
 
   for (const city of world.cities) {
     const worldX = city.x * world.tileSize
     const worldY = city.y * world.tileSize
 
     for (const offset of [-1, 0, 1]) {
-      const screenX = worldX + offset * mapPixelWidth - camera.x
-
-      const screenY = worldY - camera.y
+      const position = getScreenPosition(
+        worldX + offset * mapPixelWidth,
+        worldY,
+      )
 
       ctx.fillStyle = '#d4a017'
       ctx.fillRect(
-        screenX + 6,
-        screenY + 6,
-        world.tileSize - 12,
-        world.tileSize - 12,
+        position.x + 6 * camera.zoom,
+        position.y + 6 * camera.zoom,
+        tileSize - 12 * camera.zoom,
+        tileSize - 12 * camera.zoom,
       )
 
       ctx.strokeStyle = '#ffffff'
-      ctx.lineWidth = 2
+      ctx.lineWidth = 2 * camera.zoom
 
       ctx.strokeRect(
-        screenX + 6,
-        screenY + 6,
-        world.tileSize - 12,
-        world.tileSize - 12,
+        position.x + 6 * camera.zoom,
+        position.y + 6 * camera.zoom,
+        tileSize - 12 * camera.zoom,
+        tileSize - 12 * camera.zoom,
       )
     }
   }
