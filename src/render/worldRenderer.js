@@ -280,14 +280,16 @@ function drawUnits(ctx) {
     ctx.fillStyle = unitType.color
 
     for (const offset of [-1, 0, 1]) {
-      const screenX = worldX + offset * mapPixelWidth - camera.x
-      const screenY = worldY - camera.y
+      const position = getScreenPosition(
+        worldX + offset * mapPixelWidth,
+        worldY,
+      )
 
       ctx.fillRect(
-        screenX + 8,
-        screenY + 8,
-        world.tileSize - 16,
-        world.tileSize - 16,
+        position.x + 8 * camera.zoom,
+        position.y + 8 * camera.zoom,
+        (world.tileSize - 16) * camera.zoom,
+        (world.tileSize - 16) * camera.zoom,
       )
     }
   }
