@@ -34,6 +34,13 @@ export function renderWorld(ctx) {
   drawFogOfWar(ctx)
 }
 
+function getScreenPosition(worldX, worldY) {
+  return {
+    x: (worldX - camera.x) * camera.zoom,
+    y: (worldY - camera.y) * camera.zoom,
+  }
+}
+
 function drawTiles(ctx) {
   const mapPixelWidth = world.getPixelWidth()
 
