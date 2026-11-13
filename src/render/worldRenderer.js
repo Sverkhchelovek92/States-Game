@@ -346,14 +346,13 @@ function drawSelectedUnit(ctx) {
   ctx.lineWidth = 3
 
   for (const offset of [-1, 0, 1]) {
-    const screenX = worldX + offset * mapPixelWidth - camera.x
-    const screenY = worldY - camera.y
+    const position = getScreenPosition(worldX + offset * mapPixelWidth, worldY)
 
     ctx.strokeRect(
-      screenX + 4,
-      screenY + 4,
-      world.tileSize - 8,
-      world.tileSize - 8,
+      position.x + 4 * camera.zoom,
+      position.y + 4 * camera.zoom,
+      (world.tileSize - 8) * camera.zoom,
+      (world.tileSize - 8) * camera.zoom,
     )
   }
 }
