@@ -86,7 +86,7 @@ function drawElevation(ctx) {
   ctx.save()
 
   ctx.fillStyle = '#222'
-  ctx.font = '18px Arial'
+  ctx.font = `${18 * camera.zoom}px Arial`
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
 
@@ -102,8 +102,10 @@ function drawElevation(ctx) {
       const worldY = y * world.tileSize
 
       for (const offset of [-1, 0, 1]) {
-        const screenX = worldX + offset * mapPixelWidth - camera.x
-        const screenY = worldY - camera.y
+        const position = getScreenPosition(
+          worldX + offset * mapPixelWidth,
+          worldY,
+        )
 
         let symbol = ''
 
@@ -117,8 +119,8 @@ function drawElevation(ctx) {
 
         ctx.fillText(
           symbol,
-          screenX + world.tileSize / 2,
-          screenY + world.tileSize / 2,
+          position.x + (world.tileSize * camera.zoom) / 2,
+          position.y + (world.tileSize * camera.zoom) / 2,
         )
       }
     }
