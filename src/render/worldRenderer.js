@@ -237,13 +237,19 @@ function drawHover(ctx) {
   const worldY = hover.tileY * world.tileSize
 
   ctx.strokeStyle = '#ffff00'
-  ctx.lineWidth = 3
+  ctx.lineWidth = 3 * camera.zoom
 
   for (const offset of [-1, 0, 1]) {
-    const screenX = worldX + offset * mapPixelWidth - camera.x
-    const screenY = worldY - camera.y
+    const screenX = (worldX + offset * mapPixelWidth - camera.x) * camera.zoom
 
-    ctx.strokeRect(screenX, screenY, world.tileSize, world.tileSize)
+    const screenY = (worldY - camera.y) * camera.zoom
+
+    ctx.strokeRect(
+      screenX,
+      screenY,
+      world.tileSize * camera.zoom,
+      world.tileSize * camera.zoom,
+    )
   }
 }
 

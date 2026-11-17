@@ -8,8 +8,8 @@ export const hover = {
 }
 
 export function updateHover(mouseX, mouseY) {
-  const worldX = mouseX + camera.x
-  const worldY = mouseY + camera.y
+  const worldX = mouseX / camera.zoom + camera.x
+  const worldY = mouseY / camera.zoom + camera.y
 
   let tileX = Math.floor(worldX / world.tileSize)
 
