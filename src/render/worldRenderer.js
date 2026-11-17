@@ -396,7 +396,7 @@ function drawCityTerritories(ctx) {
   ctx.save()
 
   ctx.strokeStyle = '#ffffff'
-  ctx.lineWidth = 2
+  ctx.lineWidth = 2 * camera.zoom
 
   for (const city of world.cities) {
     for (let y = 0; y < world.height; y++) {
@@ -452,23 +452,26 @@ function drawTerritoryBorder(ctx, x, y, cityId) {
   const worldY = y * tileSize
 
   for (const offset of [-1, 0, 1]) {
-    const screenX = worldX + offset * mapPixelWidth - camera.x
+    const position = getScreenPosition(worldX + offset * mapPixelWidth, worldY)
 
-    const screenY = worldY - camera.y
+    const screenX = position.x
+    const screenY = position.y
+
+    const scaledTileSize = tileSize * camera.zoom
 
     // Top
     if (!isSameCityTile(x, y - 1, cityId)) {
       ctx.beginPath()
       ctx.moveTo(screenX, screenY)
-      ctx.lineTo(screenX + tileSize, screenY)
+      ctx.lineTo(screenX + scaledTileSize, screenY)
       ctx.stroke()
     }
 
     // Bottom
     if (!isSameCityTile(x, y + 1, cityId)) {
       ctx.beginPath()
-      ctx.moveTo(screenX, screenY + tileSize)
-      ctx.lineTo(screenX + tileSize, screenY + tileSize)
+      ctx.moveTo(screenX, screenY + scaledTileSize)
+      ctx.lineTo(screenX + scaledTileSize, screenY + scaledTileSize)
       ctx.stroke()
     }
 
@@ -476,15 +479,15 @@ function drawTerritoryBorder(ctx, x, y, cityId) {
     if (!isSameCityTile(x - 1, y, cityId)) {
       ctx.beginPath()
       ctx.moveTo(screenX, screenY)
-      ctx.lineTo(screenX, screenY + tileSize)
+      ctx.lineTo(screenX, screenY + scaledTileSize)
       ctx.stroke()
     }
 
     // Right
     if (!isSameCityTile(x + 1, y, cityId)) {
       ctx.beginPath()
-      ctx.moveTo(screenX + tileSize, screenY)
-      ctx.lineTo(screenX + tileSize, screenY + tileSize)
+      ctx.moveTo(screenX + scaledTileSize, screenY)
+      ctx.lineTo(screenX + scaledTileSize, screenY + scaledTileSize)
       ctx.stroke()
     }
   }
