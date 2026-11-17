@@ -365,6 +365,7 @@ function drawSelectedUnit(ctx) {
 
 function drawFogOfWar(ctx) {
   const mapPixelWidth = world.getPixelWidth()
+  const tileSize = world.tileSize * camera.zoom
 
   ctx.save()
 
@@ -380,11 +381,12 @@ function drawFogOfWar(ctx) {
       const worldY = y * world.tileSize
 
       for (const offset of [-1, 0, 1]) {
-        const screenX = worldX + offset * mapPixelWidth - camera.x
+        const position = getScreenPosition(
+          worldX + offset * mapPixelWidth,
+          worldY,
+        )
 
-        const screenY = worldY - camera.y
-
-        ctx.fillRect(screenX, screenY, world.tileSize, world.tileSize)
+        ctx.fillRect(position.x, position.y, tileSize, tileSize)
       }
     }
   }
@@ -417,6 +419,7 @@ function drawCityTerritories(ctx) {
 
 function drawWorkedTiles(ctx) {
   const mapPixelWidth = world.getPixelWidth()
+  const tileSize = world.tileSize * camera.zoom
 
   for (const city of world.cities) {
     const workedTiles = getCityWorkedTiles(city)
@@ -426,18 +429,19 @@ function drawWorkedTiles(ctx) {
       const worldY = tile.y * world.tileSize
 
       for (const offset of [-1, 0, 1]) {
-        const screenX = worldX + offset * mapPixelWidth - camera.x
-
-        const screenY = worldY - camera.y
+        const position = getScreenPosition(
+          worldX + offset * mapPixelWidth,
+          worldY,
+        )
 
         ctx.strokeStyle = '#ffd700'
-        ctx.lineWidth = 3
+        ctx.lineWidth = 3 * camera.zoom
 
         ctx.strokeRect(
-          screenX + 2,
-          screenY + 2,
-          world.tileSize - 4,
-          world.tileSize - 4,
+          position.x + 2 * camera.zoom,
+          position.y + 2 * camera.zoom,
+          tileSize - 4 * camera.zoom,
+          tileSize - 4 * camera.zoom,
         )
       }
     }
