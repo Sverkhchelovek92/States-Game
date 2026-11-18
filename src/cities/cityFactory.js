@@ -27,5 +27,7 @@ export function createCity(x, y, owner) {
 
     health: 100,
     maxHealth: 100,
+
+    workedTiles: null,
   }
 }

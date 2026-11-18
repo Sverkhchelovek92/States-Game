@@ -2,6 +2,9 @@ import { world } from '../world.js'
 import { TERRAIN_TYPES } from '../world/terrainTypes.js'
 
 export function getCityWorkedTiles(city) {
+  if (city.workedTiles !== null) {
+    return city.workedTiles.map(({ x, y }) => world.tiles[y][x])
+  }
   const territory = []
 
   for (let y = 0; y < world.height; y++) {
