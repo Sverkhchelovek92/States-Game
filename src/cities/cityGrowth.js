@@ -76,3 +76,50 @@ export function processCityGrowth(city) {
 
   console.log(`${city.name} grew to population ${city.population}`)
 }
+
+export function toggleCityWorkedTile(city, x, y) {
+  if (x < 0 || x >= world.width || y < 0 || y >= world.height) {
+    return false
+  }
+
+  const tile = world.tiles[y][x]
+
+  // Tile should belong to City
+  if (tile.owner !== city.id) {
+    return false
+  }
+
+  // City center always working
+  if (x === city.x && y === city.y) {
+    return false
+  }
+
+  // First choice is automatic
+  if (city.workedTiles === null) {
+    city.workedTiles = getCityWorkedTiles(city).map((workedTile) => ({
+      x: workedTile.x,
+      y: workedTile.y,
+    }))
+  }
+
+  const index = city.workedTiles.findIndex(
+    (workedTile) => workedTile.x === x && workedTile.y === y,
+  )
+
+  if (index !== -1) {
+    // Remove tile from working
+    city.workedTiles.splice(index, 1)
+    return true
+  }
+
+  // Restrain the amount of working tiles
+  const maxWorkedTiles = city.population + 1
+
+  if (city.workedTiles.length >= maxWorkedTiles) {
+    return false
+  }
+
+  city.workedTiles.push({ x, y })
+
+  return true
+}
