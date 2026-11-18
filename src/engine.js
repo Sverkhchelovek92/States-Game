@@ -177,15 +177,12 @@ export const engine = {
     }
 
     // y limit
-    const maxCameraY = Math.max(0, world.getPixelHeight() - this.height)
+    const visibleWorldHeight = this.height / camera.zoom
 
-    if (camera.y < 0) {
-      camera.y = 0
-    }
+    const maxCameraY = Math.max(0, world.getPixelHeight() - visibleWorldHeight)
 
-    if (camera.y > maxCameraY) {
-      camera.y = maxCameraY
-    }
+    if (camera.y < 0) camera.y = 0
+    if (camera.y > maxCameraY) camera.y = maxCameraY
 
     // x wrapping
 
