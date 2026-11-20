@@ -20,6 +20,7 @@ import {
   clearCitySelection,
 } from './cities/citySelection.js'
 import { showCityPanel, hideCityPanel } from './cities/cityPanel.js'
+import { toggleCityWorkedTile } from './cities/cityGrowth.js'
 
 const PLAYER_ID = 1
 
@@ -90,6 +91,12 @@ export const engine = {
         showCityPanel()
 
         enterCityMode(cityUnderCursor, this.width, this.height)
+
+        return
+      }
+
+      if (camera.mode === 'city' && citySelection.city) {
+        toggleCityWorkedTile(citySelection.city, hover.tileX, hover.tileY)
 
         return
       }
