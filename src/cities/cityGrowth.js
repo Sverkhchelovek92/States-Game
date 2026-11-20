@@ -121,6 +121,10 @@ export function processCityGrowth(city) {
 
   city.foodToGrow = city.population * 10
 
+  if (city.workedTiles !== null) {
+    assignBestAvailableWorkedTile(city)
+  }
+
   console.log(`${city.name} grew to population ${city.population}`)
 }
 
