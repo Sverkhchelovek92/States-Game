@@ -33,6 +33,53 @@ export function getCityWorkedTiles(city) {
   return [centerTile, ...otherTiles.slice(0, maxWorkedTiles - 1)]
 }
 
+export function assignBestAvailableWorkedTile(city) {
+  if (city.workedTiles === null) {
+    return false
+  }
+
+  const territory = []
+
+  for (let y = 0; y < world.height; y++) {
+    for (let x = 0; x < world.width; x++) {
+      const tile = world.tiles[y][x]
+
+      if (tile.owner !== city.id) {
+        continue
+      }
+
+      territory.push(tile)
+    }
+  }
+
+  const workedKeys = new Set(
+    city.workedTiles.map((tile) => `${tile.x},${tile.y}`),
+  )
+
+  const availableTiles = territory
+    .filter((tile) => !workedKeys.has(`${tile.x},${tile.y}`))
+    .sort((a, b) => {
+      const foodA = TERRAIN_TYPES[a.terrain]?.food ?? 0
+
+      const foodB = TERRAIN_TYPES[b.terrain]?.food ?? 0
+
+      return foodB - foodA
+    })
+
+  if (availableTiles.length === 0) {
+    return false
+  }
+
+  const tile = availableTiles[0]
+
+  city.workedTiles.push({
+    x: tile.x,
+    y: tile.y,
+  })
+
+  return true
+}
+
 export function getCityFood(city) {
   const workedTiles = getCityWorkedTiles(city)
 
